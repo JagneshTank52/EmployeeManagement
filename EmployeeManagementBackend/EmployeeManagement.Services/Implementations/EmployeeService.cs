@@ -21,7 +21,7 @@ public class EmployeeService : IEmployeeService
     }
     public async Task<List<EmployeeDetailDTO>> GetEmployees()
     {
-        var employees = await _employeeRepository.GetAllAsync(include: i => i.Include(a => a.Department).Include(a => a.Role));
+        var employees = await _employeeRepository.GetAllAsync(include: i => i.Include(a => a.Department).Include(a => a.Role),filter: f => !f.IsDeleted);
 
         List<EmployeeDetailDTO> employeeList = _mapper.Map<List<EmployeeDetailDTO>>(employees);
 

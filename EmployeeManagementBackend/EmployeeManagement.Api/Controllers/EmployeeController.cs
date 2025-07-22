@@ -15,6 +15,14 @@ public class EmployeeController : ControllerBase
         _employeeService = employeeService;
     }
 
+    /// <summary>
+    /// Retrieves a list of all employees.
+    /// </summary>
+    /// <returns>An ActionResult containing a list of EmployeeDetailDTO objects.
+    /// </returns>
+    /// <remarks>
+    /// **Route:** GET /api/Employee
+    /// </remarks>
     [HttpGet]
     public async Task<IActionResult> GetEmployeeList()
     {
@@ -22,6 +30,14 @@ public class EmployeeController : ControllerBase
         return Ok(employees);
     }
 
+    /// <summary>
+    /// Retrieves a single employee by their ID.
+    /// </summary>
+    /// <param name="id">The ID of the employee to retrieve.</param>
+    /// <returns>An ActionResult containing an EmployeeDetailDTO object or a NotFound result.</returns>
+    /// <remarks>
+    /// **Route:** GET /api/Employee/{id}
+    /// </remarks>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetEmployeeById(int id)
     {
@@ -33,6 +49,14 @@ public class EmployeeController : ControllerBase
         return Ok(employee);
     }
 
+    /// <summary>
+    /// Creates a new employee record.
+    /// </summary>
+    /// <param name="newEmployee">The data for the new employee, sent in the request body.</param>
+    /// <returns>An ActionResult indicating the result of the creation operation.</returns>
+    /// <remarks>
+    /// **Route:** POST /api/Employee
+    /// </remarks>
     [HttpPost]
     public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeDTO newEmployee)
     {
@@ -53,6 +77,15 @@ public class EmployeeController : ControllerBase
             createdEmployeeDetails);
     }
 
+    /// <summary>
+    /// Updates an existing employee record by ID.
+    /// </summary>
+    /// <param name="id">The ID of the employee to update, from the route.</param>
+    /// <param name="updatedEmployee">The updated employee data, sent in the request body.</param>
+    /// <returns>An ActionResult indicating the result of the update operation.</returns>
+    /// <remarks>
+    /// **Route:** PUT /api/Employee/{id}
+    /// </remarks>
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateEmployee(int id, [FromBody] AddEmployeeDTO updatedEmployee)
     {
@@ -66,7 +99,7 @@ public class EmployeeController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        EmployeeDetailDTO updatedEmployeeDetails = await _employeeService.UpdateEmployee(updatedEmployee);
+        EmployeeDetailDTO? updatedEmployeeDetails = await _employeeService.UpdateEmployee(updatedEmployee);
         if(updatedEmployeeDetails == null)
         {
             return NotFound($"Employee with ID {id} not found or could not be updated.");
@@ -75,6 +108,14 @@ public class EmployeeController : ControllerBase
         return Ok(updatedEmployeeDetails);
     }
 
+    /// <summary>
+    /// Deletes an employee record by ID.
+    /// </summary>
+    /// <param name="id">The ID of the employee to delete.</param>
+    /// <returns>An ActionResult indicating the result of the deletion operation.</returns>
+    /// <remarks>
+    /// **Route:** DELETE /api/Employee/{id}
+    /// </remarks>
     [HttpDelete("{id}")]        
     public async Task<IActionResult> DeleteEmployee(int id)
     {
