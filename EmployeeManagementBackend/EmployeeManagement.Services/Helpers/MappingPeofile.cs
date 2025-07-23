@@ -13,7 +13,6 @@ public class MappingPeofile : Profile
 
         // Add Employee DTO
         CreateMap<AddEmployeeDTO, Employee>()
-            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
             .ForMember(dest => dest.Department, opt => opt.Ignore())
             .ReverseMap();
             // .ForMember(dest => dest.HashPassword, opt => opt.Ignore()) 

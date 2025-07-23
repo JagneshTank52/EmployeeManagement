@@ -172,3 +172,21 @@
 2025-07-22 18:18:28.3658 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
 2025-07-22 18:18:28.3658 Info AutoReload Config File Monitor starting
 2025-07-22 18:18:28.3916 Info Configuration initialized.
+2025-07-23 09:47:51.0024 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-07-23 09:47:51.0024 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-07-23 09:47:51.0301 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-07-23 09:47:51.0301 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-07-23 09:47:51.0301 Info AutoReload Config File Monitor starting
+2025-07-23 09:47:51.0521 Info Configuration initialized.
+2025-07-23 15:25:18.2543 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-07-23 15:25:18.2602 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-07-23 15:25:18.2826 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-07-23 15:25:18.2913 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-07-23 15:25:18.2913 Info AutoReload Config File Monitor starting
+2025-07-23 15:25:18.3127 Info Configuration initialized.
+2025-07-23 15:30:54.6029 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-07-23 15:30:54.6102 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-07-23 15:30:54.6102 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-07-23 15:30:54.6102 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-07-23 15:30:54.6102 Info AutoReload Config File Monitor starting
+2025-07-23 15:30:54.6346 Info Configuration initialized.

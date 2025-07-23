@@ -45,7 +45,7 @@ public partial class EmpManagementContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Employee__3214EC078143E256");
+            entity.HasKey(e => e.Id).HasName("PK__Employee__3214EC07E9901F1F");
 
             entity.ToTable("Employee");
 
@@ -59,9 +59,6 @@ public partial class EmpManagementContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.FirstName)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-            entity.Property(e => e.FullName)
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.Gender)
@@ -80,16 +77,19 @@ public partial class EmpManagementContext : DbContext
                 .HasMaxLength(20)
                 .IsUnicode(false);
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+            entity.Property(e => e.UserName)
+                .HasMaxLength(255)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.Department).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.DepartmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employee__Depart__71D1E811");
+                .HasConstraintName("FK__Employee__Depart__04E4BC85");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employee__RoleId__72C60C4A");
+                .HasConstraintName("FK__Employee__RoleId__05D8E0BE");
         });
 
         modelBuilder.Entity<Role>(entity =>
