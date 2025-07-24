@@ -14,19 +14,6 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
  
     public EmployeeRepository(EmpManagementContext context) : base(context){}
 
-    // public async Task<int> AddCustomer(Employee newEmployee)
-    // {
-    //    try
-    //     {
-    //         await _dbSet.AddAsync(newEmployee);
-    //         return newEmployee.Id;
-    //     }
-    //     catch (Exception)
-    //     {
-    //         throw new NotImplementedException();
-    //     }
-    // }
-
     public override async Task<Employee?> AddAsync(Employee entity)
     {
         Employee? addedEmployee = await base.AddAsync(entity);
@@ -75,4 +62,9 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
         return await _context.Employees.AnyAsync(e => e.Email == email);
     }
 
+    public Task<Employee?> GetEmployeeByEmail(string email)
+    {
+        // here you need to also include department
+        return _context.Employees.Include(i => i.Role).Include(i => i.Department).FirstOrDefaultAsync(f => f.Email == email && !f.IsDeleted);
+    }
 }

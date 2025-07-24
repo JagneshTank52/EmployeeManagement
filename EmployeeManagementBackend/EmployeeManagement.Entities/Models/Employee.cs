@@ -39,5 +39,7 @@ public partial class Employee
 
     public virtual Department Department { get; set; } = null!;
 
+    public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+
     public virtual Role Role { get; set; } = null!;
 }

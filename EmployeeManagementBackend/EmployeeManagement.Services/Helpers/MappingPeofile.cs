@@ -27,7 +27,5 @@ public class MappingPeofile : Profile
        CreateMap<EmployeeDetailDTO, Employee>()           
             .ForMember(dest => dest.Department, opt => opt.Ignore()) 
             .ForMember(dest => dest.Role, opt => opt.Ignore());
-
-
     }
 }

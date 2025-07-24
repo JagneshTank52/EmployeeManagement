@@ -9,6 +9,7 @@ public interface IGenericRepository<T> where T: class
         Expression<Func<T, object>>? orderBy = null,
         Func<IQueryable<T>, IQueryable<T>>? include = null);
     // GET ENTITY BY ID
+    Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter);
     public Task<T?> GetByIdAsync(int id);
     public Task<T?> AddAsync(T entity);
     public Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null);

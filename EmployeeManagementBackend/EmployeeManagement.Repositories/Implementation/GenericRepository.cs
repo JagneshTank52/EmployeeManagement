@@ -48,6 +48,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     // GET ENTITY BY ID
     public virtual async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
     
+    public virtual async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter){
+        return await _dbSet.Where(filter).FirstOrDefaultAsync();
+    }
+
     // Add Async
     public virtual async Task<T?> AddAsync(T entity)
     {
