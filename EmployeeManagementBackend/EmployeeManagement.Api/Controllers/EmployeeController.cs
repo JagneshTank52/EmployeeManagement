@@ -1,6 +1,7 @@
 
 using EmployeeManagement.Services.DTO;
 using EmployeeManagement.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Api.Controllers;
@@ -24,6 +25,7 @@ public class EmployeeController : ControllerBase
     /// **Route:** GET /api/Employee
     /// </remarks>
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetEmployeeList()
     {
         List<EmployeeDetailDTO> employees = await _employeeService.GetEmployees();

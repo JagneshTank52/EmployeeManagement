@@ -42,11 +42,23 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings.Issuer,
+        ValidIssuer = jwtSettings!.Issuer,
         ValidAudience = jwtSettings.Audience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
         ClockSkew = TimeSpan.Zero // Remove default 5-minute clock skew
     };
+    // options.Events = new JwtBearerEvents
+    // {
+    //     OnMessageReceived = context =>
+    //     {
+    //         if (context.Request.Cookies.ContainsKey("RefreshToken"))
+    //         {
+    //             context.Token = context.Request.Cookies["RefreshToken"];
+    //         }
+    //         return Task.CompletedTask;
+    //     }
+    // };
+
 });
 builder.Services.AddAuthorization();
 
@@ -60,8 +72,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(AllowSpecificOrigins,
                       builder =>
                       {
-                          builder.WithOrigins("http://localhost:4200") // <--- Allow your Angular app's origin
-                                 .AllowAnyHeader() // Allow all headers
+                          builder.WithOrigins("https://localhost:4200") // <--- Allow your Angular app's origin
+                                 .AllowAnyHeader() // Allow all headers 
                                  .AllowAnyMethod() // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
                                  .AllowCredentials(); // <--- Crucial if you are sending cookies or authentication headers
                       });

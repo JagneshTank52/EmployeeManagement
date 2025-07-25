@@ -3,6 +3,7 @@ using EmployeeManagement.Services.Auth.DTO;
 using EmployeeManagement.Services.DTO.Auth;
 using EmployeeManagement.Services.Implementations;
 using EmployeeManagement.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Api.Controllers;
@@ -30,18 +31,25 @@ public class AuthController : ControllerBase
         Response.Cookies.Append("RefreshToken", result.Data!.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
-            Secure = true,           // only send cookie over HTTPS
-            SameSite = SameSiteMode.Strict,
+            Secure = true,         
+            SameSite = SameSiteMode.None,
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
-        
+
         return Ok(result);
     }
 
     [HttpPost("refresh-token")]
-    public async Task<ActionResult<ApiResponse<AuthResponseDTO>>> RefreshToken([FromBody] RefreshTokenRequestDto refreshRequest)
+    public async Task<ActionResult<ApiResponse<AuthResponseDTO>>> RefreshToken()
     {
+        var refreshToken = Request.Cookies["RefreshToken"];
+
+        if (string.IsNullOrEmpty(refreshToken))
+            return Ok(ApiResponse<AuthResponseDTO>.ErrorResponse("No refresh token found"));
+
+        var refreshRequest = new RefreshTokenRequestDto { RefreshToken = refreshToken };
         var result = await _authService.RefreshTokenAsync(refreshRequest);
+
         if (!result.Success)
         {
             return Unauthorized(result);

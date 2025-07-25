@@ -5,6 +5,7 @@ using EmployeeManagement.Services.Auth.DTO;
 using EmployeeManagement.Services.DTO;
 using EmployeeManagement.Services.DTO.Auth;
 using EmployeeManagement.Services.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace EmployeeManagement.Services.Implementations;
 
@@ -14,12 +15,15 @@ public class AuthenticationService : IAuthenticationService
     private readonly ITokenService _tokenService;
     private readonly JwtSettings _jwtSettings;
     private readonly IMapper _mapper;
-    public AuthenticationService(ITokenService tokenService, JwtSettings jwtSettings, IMapper mapper, IEmployeeRepository employeeRepository)
+    private readonly IConfiguration _config;
+    public AuthenticationService(IConfiguration configuration, ITokenService tokenService, JwtSettings jwtSettings, IMapper mapper, IEmployeeRepository employeeRepository)
     {
         _tokenService = tokenService;
         _jwtSettings = jwtSettings;
         _mapper = mapper;
+        _config = configuration;
         _employeeRepository = employeeRepository;
+
     }
     public async Task<ApiResponse<AuthResponseDTO>> LoginAsync(LoginRequestDTO loginRequest)
     {
@@ -35,7 +39,13 @@ public class AuthenticationService : IAuthenticationService
 
         string actualToken = await _tokenService.SaveRefreshTokenAsync(employee.Id, refreshToken);
 
-        var expiresIn = (long)TimeSpan.FromMinutes(_jwtSettings.AccessTokenExpirationMinutes).TotalSeconds;
+        double expireMinute;
+        if (!double.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out expireMinute))
+        {
+            expireMinute = 2;
+        }
+
+        var expiresIn = DateTime.Now.AddMinutes(expireMinute);
 
         var authResponse = new AuthResponseDTO
         {
@@ -67,12 +77,18 @@ public class AuthenticationService : IAuthenticationService
 
         bool isUpdated = await _tokenService.UpdateRefreshToken(ValidRefreshToken, newRefreshToken);
 
-        if(!isUpdated){
+        if (!isUpdated)
+        {
             return ApiResponse<AuthResponseDTO>.ErrorResponse("Refresh token not generated");
         }
 
-        // var employeeDto = _mapper.Map<EmployeeDetailDTO>(ValidRefreshToken.Employee);
-        var expiresIn = (long)TimeSpan.FromMinutes(_jwtSettings.AccessTokenExpirationMinutes).TotalSeconds;
+        double expireMinute;
+        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireMinute))
+        {
+            expireMinute = 2;
+        }
+
+        var expiresIn = DateTime.Now.AddMinutes(expireMinute);
 
         var authResponse = new AuthResponseDTO
         {
