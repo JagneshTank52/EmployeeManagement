@@ -31,7 +31,7 @@ public class AuthController : ControllerBase
         Response.Cookies.Append("RefreshToken", result.Data!.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
-            Secure = true,         
+            Secure = true,
             SameSite = SameSiteMode.None,
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
@@ -54,13 +54,32 @@ public class AuthController : ControllerBase
         {
             return Unauthorized(result);
         }
+
+        Response.Cookies.Append("RefreshToken", result.Data!.RefreshToken, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.None,
+            Expires = result.Data!.ExpiresIn
+        });
+        
         return Ok(result);
     }
 
     [HttpPost("logout")]
-    public async Task<ActionResult<ApiResponse<bool>>> Logout([FromBody] RefreshTokenRequestDto refreshRequest)
+    public async Task<ActionResult<ApiResponse<bool>>> Logout()
     {
+        var refreshToken = Request.Cookies["RefreshToken"];
+
+        if (string.IsNullOrEmpty(refreshToken))
+            return Ok(ApiResponse<AuthResponseDTO>.ErrorResponse("No refresh token found"));
+
+        var refreshRequest = new RefreshTokenRequestDto { RefreshToken = refreshToken };
+
         var result = await _authService.LogoutAsync(refreshRequest.RefreshToken);
+
+        Response.Cookies.Delete("RefreshToken");
+
         if (!result.Success)
         {
             // Even if it fails, the client should proceed with local cleanup

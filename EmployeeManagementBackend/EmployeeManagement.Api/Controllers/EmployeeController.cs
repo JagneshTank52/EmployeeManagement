@@ -73,7 +73,7 @@ public class EmployeeController : ControllerBase
             return Conflict("Employee with this email already exists.");
         }
 
-         return CreatedAtAction(
+        return CreatedAtAction(
             nameof(GetEmployeeById), 
             new { id = createdEmployeeDetails.Id }, 
             createdEmployeeDetails);

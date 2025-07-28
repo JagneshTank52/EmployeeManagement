@@ -23,7 +23,7 @@ public class AuthenticationRepository : GenericRepository<RefreshToken>, IAuthen
 
     public async Task<RefreshToken?> GetRefreshToken(string refreshToken)
     {
-        var token = await _context.RefreshTokens
+        var token = await _context.RefreshTokens.Include(i => i.Employee).ThenInclude(t => t.Role)
             .FirstOrDefaultAsync(rt => rt.Token == refreshToken);
 
         return token;

@@ -78,17 +78,17 @@ public class TokenService : ITokenService
 
     public async Task<string> SaveRefreshTokenAsync(int employeeId, string refreshToken)
     {
-        double expireMinute;
-        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireMinute))
+        double expireDays;
+        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireDays))
         {
-            expireMinute = 1;
+            expireDays = 1;
         }
 
         var refreshTokenEntity = new RefreshToken
         {
             Token = refreshToken,
             // note - here you can playwith time also
-            ExpiryDate = DateTime.UtcNow.AddMinutes(expireMinute),
+            ExpiryDate = DateTime.UtcNow.AddDays(expireDays),
             IsRevoked = false,
             EmployeeId = employeeId,
             CreatedAt = DateTime.UtcNow
@@ -120,9 +120,9 @@ public class TokenService : ITokenService
         if (token != null && token.ExpiryDate > DateTime.UtcNow)
         {
             return token;
+        }else{
+            return null;
         }
-
-        return null;
     }
 
 }

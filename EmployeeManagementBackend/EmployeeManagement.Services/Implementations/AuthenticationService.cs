@@ -39,13 +39,13 @@ public class AuthenticationService : IAuthenticationService
 
         string actualToken = await _tokenService.SaveRefreshTokenAsync(employee.Id, refreshToken);
 
-        double expireMinute;
-        if (!double.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out expireMinute))
+        double expireDays;
+        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireDays))
         {
-            expireMinute = 2;
+            expireDays = 7;
         }
 
-        var expiresIn = DateTime.Now.AddMinutes(expireMinute);
+        var expiresIn = DateTime.Now.AddDays(expireDays);
 
         var authResponse = new AuthResponseDTO
         {
@@ -94,7 +94,7 @@ public class AuthenticationService : IAuthenticationService
         {
             AccessToken = newAccessToken,
             RefreshToken = newRefreshToken,
-            ExpiresIn = expiresIn,
+            ExpiresIn = ValidRefreshToken.ExpiryDate,
         };
         return ApiResponse<AuthResponseDTO>.SuccessResponse(authResponse, "Token refreshed successfully.");
 
