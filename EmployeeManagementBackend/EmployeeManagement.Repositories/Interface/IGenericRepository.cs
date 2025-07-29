@@ -8,6 +8,15 @@ public interface IGenericRepository<T> where T: class
         Expression<Func<T, bool>>? filter = null,
         Expression<Func<T, object>>? orderBy = null,
         Func<IQueryable<T>, IQueryable<T>>? include = null);
+
+    Task<(IEnumerable<T> records, int totalRecord, int pageIndex,int pageSize)> GetPagedRecords(
+        int pageSize,
+        int pageIndex,
+        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy,
+        Expression<Func<T, bool>>? filter = null,
+        Func<IQueryable<T>, IQueryable<T>>? include = null
+    );
+
     // GET ENTITY BY ID
     Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter);
     public Task<T?> GetByIdAsync(int id);

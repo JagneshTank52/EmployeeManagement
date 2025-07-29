@@ -14,13 +14,11 @@ namespace EmployeeManagement.Services.Implementations;
 
 public class TokenService : ITokenService
 {
-    private readonly JwtSettings _jwtSettings;
     private readonly IConfiguration _config;
     private readonly IAuthenticationRepository _authRepository;
 
-    public TokenService(IOptions<JwtSettings> jwtSettings, IAuthenticationRepository authRepository, IConfiguration configuration)
+    public TokenService(IAuthenticationRepository authRepository, IConfiguration configuration)
     {
-        _jwtSettings = jwtSettings.Value;
         _authRepository = authRepository;
         _config = configuration;
     }

@@ -19,16 +19,17 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
+    /// <summary>
+    /// Authenticates user and returns access/refresh tokens
+    /// </summary>
+    /// <param name="loginRequest">Login credentials</param>
+    /// <returns>SuccessResponse with auth tokens or ErrorResponse if authentication fails</returns>
     [HttpPost("login")]
-    public async Task<ActionResult<ApiResponse<AuthResponseDTO>>> Login([FromBody] LoginRequestDTO loginRequest)
+    public async Task<ActionResult<SuccessResponse<AuthResponseDTO>>> Login([FromBody] LoginRequestDTO loginRequest)
     {
         var result = await _authService.LoginAsync(loginRequest);
-        if (!result.Success)
-        {
-            return Unauthorized(result);
-        }
 
-        Response.Cookies.Append("RefreshToken", result.Data!.RefreshToken, new CookieOptions
+        Response.Cookies.Append("RefreshToken", result.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
             Secure = true,
@@ -36,55 +37,63 @@ public class AuthController : ControllerBase
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
 
-        return Ok(result);
+        return Ok(SuccessResponse<AuthResponseDTO>.Create(
+            data: result,
+            message: "Login successful"
+        ));
     }
 
+    /// <summary>
+    /// Refreshes access token using refresh token from cookie
+    /// </summary>
+    /// <returns>SuccessResponse with new tokens or ErrorResponse if refresh fails</returns>
     [HttpPost("refresh-token")]
-    public async Task<ActionResult<ApiResponse<AuthResponseDTO>>> RefreshToken()
+    public async Task<ActionResult<SuccessResponse<AuthResponseDTO>>> RefreshToken()
     {
         var refreshToken = Request.Cookies["RefreshToken"];
 
         if (string.IsNullOrEmpty(refreshToken))
-            return Ok(ApiResponse<AuthResponseDTO>.ErrorResponse("No refresh token found"));
-
-        var refreshRequest = new RefreshTokenRequestDto { RefreshToken = refreshToken };
-        var result = await _authService.RefreshTokenAsync(refreshRequest);
-
-        if (!result.Success)
         {
-            return Unauthorized(result);
+            throw new UnauthorizedAccessException("No refresh token found");
         }
 
-        Response.Cookies.Append("RefreshToken", result.Data!.RefreshToken, new CookieOptions
+        var result = await _authService.RefreshTokenAsync(refreshToken);
+
+        Response.Cookies.Append("RefreshToken", result.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
             Secure = true,
             SameSite = SameSiteMode.None,
-            Expires = result.Data!.ExpiresIn
+            Expires = result.ExpiresIn
         });
-        
-        return Ok(result);
+
+        return Ok(SuccessResponse<AuthResponseDTO>.Create(
+            data: result,
+            message: "Token refreshed successfully"
+        ));
     }
 
+    /// <summary>
+    /// Logs out user and invalidates refresh token
+    /// </summary>
+    /// <returns>SuccessResponse confirming logout or ErrorResponse if logout fails</returns>
     [HttpPost("logout")]
-    public async Task<ActionResult<ApiResponse<bool>>> Logout()
+    public async Task<ActionResult<SuccessResponse<bool>>> Logout()
     {
         var refreshToken = Request.Cookies["RefreshToken"];
 
         if (string.IsNullOrEmpty(refreshToken))
-            return Ok(ApiResponse<AuthResponseDTO>.ErrorResponse("No refresh token found"));
-
-        var refreshRequest = new RefreshTokenRequestDto { RefreshToken = refreshToken };
-
-        var result = await _authService.LogoutAsync(refreshRequest.RefreshToken);
-
-        Response.Cookies.Delete("RefreshToken");
-
-        if (!result.Success)
         {
-            // Even if it fails, the client should proceed with local cleanup
-            return BadRequest(result);
+            throw new UnauthorizedAccessException("No refresh token found");
         }
-        return Ok(result);
+
+        bool result = await _authService.LogoutAsync(refreshToken);
+
+        Response.Cookies.Delete("RefreshToken");    
+
+        return Ok(SuccessResponse<bool>.Create(
+            data: result,
+             message: "Logout successful"
+        ));
     }
 }

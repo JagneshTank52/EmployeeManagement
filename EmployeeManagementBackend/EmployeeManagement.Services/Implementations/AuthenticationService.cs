@@ -13,63 +13,87 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly IEmployeeRepository _employeeRepository;
     private readonly ITokenService _tokenService;
-    private readonly JwtSettings _jwtSettings;
     private readonly IMapper _mapper;
     private readonly IConfiguration _config;
-    public AuthenticationService(IConfiguration configuration, ITokenService tokenService, JwtSettings jwtSettings, IMapper mapper, IEmployeeRepository employeeRepository)
+    public AuthenticationService(IConfiguration configuration, ITokenService tokenService, IMapper mapper, IEmployeeRepository employeeRepository)
     {
         _tokenService = tokenService;
-        _jwtSettings = jwtSettings;
         _mapper = mapper;
         _config = configuration;
         _employeeRepository = employeeRepository;
 
     }
-    public async Task<ApiResponse<AuthResponseDTO>> LoginAsync(LoginRequestDTO loginRequest)
+    /// <summary>
+    /// Authenticates user and returns authentication tokens
+    /// </summary>
+    /// <param name="loginRequest">Login credentials</param>
+    /// <returns>AuthResponseDTO with access and refresh tokens</returns>
+    /// <exception cref="UnauthorizedAccessException">Thrown when credentials are invalid</exception>
+    public async Task<AuthResponseDTO> LoginAsync(LoginRequestDTO loginRequest)
     {
         Employee? employee = await _employeeRepository.GetEmployeeByEmail(loginRequest.Email);
 
         if (employee == null || employee.Password != loginRequest.Password)
         {
-            return ApiResponse<AuthResponseDTO>.ErrorResponse("Invalid email or password.");
+            throw new UnauthorizedAccessException("Invalid email or password");
         }
 
         var accessToken = _tokenService.GenerateAccessToken(employee);
         var refreshToken = _tokenService.GenerateRefreshToken();
-
         string actualToken = await _tokenService.SaveRefreshTokenAsync(employee.Id, refreshToken);
 
-        double expireDays;
-        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireDays))
+        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out double expireDays))
         {
             expireDays = 7;
         }
 
         var expiresIn = DateTime.Now.AddDays(expireDays);
 
-        var authResponse = new AuthResponseDTO
+        return new AuthResponseDTO
         {
             AccessToken = accessToken,
             RefreshToken = actualToken,
             ExpiresIn = expiresIn,
         };
-
-        return ApiResponse<AuthResponseDTO>.SuccessResponse(authResponse, "Login successful.");
     }
 
-    public async Task<ApiResponse<bool>> LogoutAsync(string refreshToken)
+    /// <summary>
+    /// Logs out user by revoking refresh token
+    /// </summary>
+    /// <param name="refreshToken">Refresh token to revoke</param>
+    /// <returns>True if logout successful</returns>
+    /// <exception cref="UnauthorizedAccessException">Thrown when refresh token is invalid</exception>
+    public async Task<bool> LogoutAsync(string refreshToken)
     {
-        await _tokenService.RevokeRefreshTokenAsync(refreshToken);
-        return ApiResponse<bool>.SuccessResponse(true, "Logout successful.");
+        if (string.IsNullOrEmpty(refreshToken))
+        {
+            throw new UnauthorizedAccessException("Refresh token is required for logout");
+        }
+        try
+        {
+            await _tokenService.RevokeRefreshTokenAsync(refreshToken);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Failed to logout user", ex);
+        }
     }
 
-    public async Task<ApiResponse<AuthResponseDTO>> RefreshTokenAsync(RefreshTokenRequestDto refreshTokenRequest)
+    /// <summary>
+    /// Refreshes access token using valid refresh token
+    /// </summary>
+    /// <param name="refreshTokenRequest">Refresh token request</param>
+    /// <returns>New AuthResponseDTO with updated tokens</returns>
+    /// <exception cref="UnauthorizedAccessException">Thrown when refresh token is invalid or expired</exception>
+    /// <exception cref="InvalidOperationException">Thrown when token refresh process fails</exception>
+    public async Task<AuthResponseDTO> RefreshTokenAsync(string refreshToken)
     {
-        RefreshToken? ValidRefreshToken = await _tokenService.ValidateRefreshTokenAsync(refreshTokenRequest.RefreshToken);
+        RefreshToken? ValidRefreshToken = await _tokenService.ValidateRefreshTokenAsync(refreshToken);
 
         if (ValidRefreshToken == null)
         {
-            return ApiResponse<AuthResponseDTO>.ErrorResponse("Invalid or expired refresh token.");
+            throw new UnauthorizedAccessException("Invalid or expired refresh token");
         }
 
         var newAccessToken = _tokenService.GenerateAccessToken(ValidRefreshToken.Employee);
@@ -79,25 +103,15 @@ public class AuthenticationService : IAuthenticationService
 
         if (!isUpdated)
         {
-            return ApiResponse<AuthResponseDTO>.ErrorResponse("Refresh token not generated");
+            throw new InvalidOperationException("Failed to update refresh token");
         }
 
-        double expireMinute;
-        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireMinute))
-        {
-            expireMinute = 2;
-        }
-
-        var expiresIn = DateTime.Now.AddMinutes(expireMinute);
-
-        var authResponse = new AuthResponseDTO
+        return new AuthResponseDTO
         {
             AccessToken = newAccessToken,
             RefreshToken = newRefreshToken,
             ExpiresIn = ValidRefreshToken.ExpiryDate,
         };
-        return ApiResponse<AuthResponseDTO>.SuccessResponse(authResponse, "Token refreshed successfully.");
-
     }
 
 }

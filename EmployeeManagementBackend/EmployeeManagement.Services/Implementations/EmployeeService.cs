@@ -1,8 +1,11 @@
+using System.Linq.Expressions;
+using System.Runtime.Intrinsics.Arm;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.DTO;
+using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,26 +17,56 @@ public class EmployeeService : IEmployeeService
 
     private readonly IMapper _mapper;
 
-    public EmployeeService(IEmployeeRepository employeeRepository,IMapper mapper)
+    public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
     {
         _employeeRepository = employeeRepository;
         _mapper = mapper;
     }
-    public async Task<List<EmployeeDetailDTO>> GetEmployees()
+    public async Task<PaginatedList<EmployeeDetailDTO>> GetEmployees(PaginationQueryParamater paramaters)
     {
-        var employees = await _employeeRepository.GetAllAsync(include: i => i.Include(a => a.Department).Include(a => a.Role),filter: f => !f.IsDeleted);
+        // 1 DEFAULT FILTER
+        Expression<Func<Employee, bool>> employeeFilter = f => !f.IsDeleted;
 
-        List<EmployeeDetailDTO> employeeList = _mapper.Map<List<EmployeeDetailDTO>>(employees);
+        // 2 SEARCH FILTER
+        if (!string.IsNullOrEmpty(paramaters.SearchTerm))
+        {
+            employeeFilter = employeeFilter.AndAlso(f => f.FirstName!.ToLower().Contains(paramaters.SearchTerm.ToLower())
+                                    || f.LastName!.ToLower().Contains(paramaters.SearchTerm.ToLower())
+                                    || f.Email.ToLower().Contains(paramaters.SearchTerm.ToLower()));
+        }
 
+        // 3 Order by
+        Func<IQueryable<Employee>, IOrderedQueryable<Employee>> employeeOrderBy = paramaters.SortBy switch
+        {
+            "name_asc" => q => q.OrderBy(o => o.FirstName),
+            _ => q => q.OrderBy(o => o.Id)
+        };
+
+        // 4 Include 
+        Func<IQueryable<Employee>, IQueryable<Employee>>? employeeInclude = i => i.Include(a => a.Department).Include(b => b.Role);
+
+        var employees = await _employeeRepository.GetPagedRecords(pageSize: paramaters.PageSize, pageIndex: paramaters.PageNumber, filter: employeeFilter, include: employeeInclude, orderBy: employeeOrderBy);
+
+        var mappedItems = _mapper.Map<List<EmployeeDetailDTO>>(employees.records);
+
+        PaginatedList<EmployeeDetailDTO> employeeList = new PaginatedList<EmployeeDetailDTO>(
+            mappedItems,
+            employees.pageIndex,
+            employees.pageSize,
+            employees.totalRecord
+        );
+        
         return employeeList;
     }
 
-    public async Task<EmployeeDetailDTO?> GetEmployeeById (int id){
+    public async Task<EmployeeDetailDTO?> GetEmployeeById(int id)
+    {
         Employee? employee = await _employeeRepository.GetByIdAsync(id);
 
-        if (employee == null){
+        if (employee == null)
+        {
             return null;
-        } 
+        }
 
         EmployeeDetailDTO employeeDetailDTO = _mapper.Map<EmployeeDetailDTO>(employee);
         return employeeDetailDTO;
@@ -41,7 +74,7 @@ public class EmployeeService : IEmployeeService
 
     public async Task<EmployeeDetailDTO?> AddEmployee(AddEmployeeDTO employeeDto)
     {
-        if ( await _employeeRepository.EmployeeExistsByEmail(employeeDto.Email))
+        if (await _employeeRepository.EmployeeExistsByEmail(employeeDto.Email))
         {
             return null;
         }
@@ -63,7 +96,7 @@ public class EmployeeService : IEmployeeService
 
         if (existingEmployee == null)
         {
-            return null; 
+            return null;
         }
 
         if (existingEmployee.Email != employeeDto.Email && await _employeeRepository.EmployeeExistsByEmail(employeeDto.Email))
@@ -71,7 +104,7 @@ public class EmployeeService : IEmployeeService
             return null; // Another employee already has this email
         }
 
-        _mapper.Map(employeeDto, existingEmployee); 
+        _mapper.Map(employeeDto, existingEmployee);
         existingEmployee.UpdatedAt = DateTime.UtcNow;
         existingEmployee.HashPassword = employeeDto.Password;
 
@@ -85,7 +118,7 @@ public class EmployeeService : IEmployeeService
     public async Task DeleteEmployee(int id)
     {
         Employee? employeeToDelete = await _employeeRepository.GetByIdAsync(id);
-        
+
         employeeToDelete!.IsDeleted = true;
         employeeToDelete.UpdatedAt = DateTime.Now;
 

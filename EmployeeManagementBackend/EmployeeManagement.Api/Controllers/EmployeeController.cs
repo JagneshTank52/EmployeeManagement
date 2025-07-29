@@ -1,4 +1,7 @@
 
+using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Shared.Convertor;
+using EmployeeManagement.Entities.Shared.ExceptionHandling;
 using EmployeeManagement.Services.DTO;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -25,11 +28,18 @@ public class EmployeeController : ControllerBase
     /// **Route:** GET /api/Employee
     /// </remarks>
     [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> GetEmployeeList()
+
+    public async Task<IActionResult> GetEmployeeList([FromQuery] PaginationQueryParamater paramater)
     {
-        List<EmployeeDetailDTO> employees = await _employeeService.GetEmployees();
-        return Ok(employees);
+        PaginatedList<EmployeeDetailDTO> employees = await _employeeService.GetEmployees(paramater);
+
+        return Ok
+            (
+                SuccessResponse<PaginatedList<EmployeeDetailDTO>>.Create(
+                    data: employees,
+                    message: "Employees retrived successfully"
+                )
+            );
     }
 
     /// <summary>
@@ -44,11 +54,19 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> GetEmployeeById(int id)
     {
         EmployeeDetailDTO? employee = await _employeeService.GetEmployeeById(id);
+
         if (employee == null)
         {
-            return NotFound();
+            throw new DataNotFoundException($"Employee with ID {id} not found");
         }
-        return Ok(employee);
+
+        return Ok
+             (
+                 SuccessResponse<EmployeeDetailDTO>.Create(
+                     data: employee,
+                     message: "Employee retrived successfully"
+                 )
+             );
     }
 
     /// <summary>
@@ -64,19 +82,21 @@ public class EmployeeController : ControllerBase
     {
         if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            var validationDetails = ValidationConvertor.ConvertModelStateToValidationDetails(ModelState);
+            throw new DataValidationException(validationDetails, "validation failed");
         }
 
-        EmployeeDetailDTO? createdEmployeeDetails = await _employeeService.AddEmployee(newEmployee);
-        if (createdEmployeeDetails == null)
-        {
-            return Conflict("Employee with this email already exists.");
-        }
+        EmployeeDetailDTO? createdEmployeeDetails = await _employeeService.AddEmployee(newEmployee) ?? throw new DataConflictException("Employee with this email already exists");
 
         return CreatedAtAction(
-            nameof(GetEmployeeById), 
-            new { id = createdEmployeeDetails.Id }, 
-            createdEmployeeDetails);
+           nameof(GetEmployeeById),
+           new { id = createdEmployeeDetails.Id },
+           SuccessResponse<EmployeeDetailDTO>.Create(
+               data: createdEmployeeDetails,
+               message: "Employee created successfully",
+               statusCode: 201
+           )
+       );
     }
 
     /// <summary>
@@ -93,21 +113,26 @@ public class EmployeeController : ControllerBase
     {
         if (id != updatedEmployee.Id)
         {
-            return BadRequest("ID in route does not match ID in request body.");
+            throw new DataValidationException("Id", "ID in route does not match ID in request body");
         }
 
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            return BadRequest(ModelState);
+            var validationDetails = ValidationConvertor.ConvertModelStateToValidationDetails(ModelState);
+            throw new DataValidationException(validationDetails, "Validation failed");
         }
 
         EmployeeDetailDTO? updatedEmployeeDetails = await _employeeService.UpdateEmployee(updatedEmployee);
+
         if(updatedEmployeeDetails == null)
         {
-            return NotFound($"Employee with ID {id} not found or could not be updated.");
+            throw new DataNotFoundException($"Employee with ID {id} not found or could not be updated");
         }
 
-        return Ok(updatedEmployeeDetails);
+        return Ok
+            (SuccessResponse<EmployeeDetailDTO>.Create(
+            data: updatedEmployeeDetails,
+            message: "Employee updated successfully"));
     }
 
     /// <summary>
@@ -122,12 +147,16 @@ public class EmployeeController : ControllerBase
     public async Task<IActionResult> DeleteEmployee(int id)
     {
         EmployeeDetailDTO? employee =  await _employeeService.GetEmployeeById(id);
+
         if (employee == null)
         {
-            return NotFound();
+            throw new DataNotFoundException($"Employee with ID {id} not found");
         }
         await _employeeService.DeleteEmployee(id);
-        
-        return NoContent(); 
+
+        return Ok(SuccessResponse<bool>.Create(
+                    data: true,
+                   message: "Employee deleted successfully"
+               ));
     }
 }

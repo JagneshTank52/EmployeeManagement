@@ -1,4 +1,5 @@
 using System.Text;
+using EmployeeManagement.Api.Middlewares;
 using EmployeeManagement.Entities.Data;
 using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Repositories.Implementation;
@@ -24,9 +25,7 @@ builder.Services.AddControllers()
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
 
-// Configure JWT Settings
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+var configuration = builder.Configuration;
 
 // Authentication
 builder.Services.AddAuthentication(options =>
@@ -42,9 +41,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings!.Issuer,
-        ValidAudience = jwtSettings.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+        ValidIssuer = configuration["JwtSettings:Issuer"],
+        ValidAudience = configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
         ClockSkew = TimeSpan.Zero // Remove default 5-minute clock skew
     };
     // options.Events = new JwtBearerEvents
@@ -85,7 +84,6 @@ builder.Logging.ClearProviders();
 builder.Services.AddAutoMapper(typeof(MappingPeofile));
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
-builder.Services.AddScoped<JwtSettings>();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -98,6 +96,9 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Host.UseNLog();
 
 var app = builder.Build();
+
+// IMPORTANT: Add the global exception middleware early in the pipeline
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

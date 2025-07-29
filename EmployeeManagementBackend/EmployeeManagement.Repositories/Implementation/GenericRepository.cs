@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using EmployeeManagement.Entities.Data;
 using EmployeeManagement.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -45,10 +46,52 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await query.ToListAsync();
     }
 
+    // PAGINATED DATA
+    public async Task<(IEnumerable<T> records, int totalRecord, int pageIndex, int pageSize)> GetPagedRecords(
+        int pageSize,
+        int pageIndex,
+        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy,
+        Expression<Func<T, bool>>? filter = null,
+        Func<IQueryable<T>, IQueryable<T>>? include = null
+    )
+    {
+        if (orderBy == null)
+        {
+            throw new ArgumentNullException(nameof(orderBy), "Ordering function cannot be null.");
+        }
+
+        IQueryable<T> query = _dbSet;
+
+        // Apply fillter 
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        // Apply Include
+        if (include != null)
+        {
+            query = include(query);
+        }
+
+        int totalRecord = query.Count();
+
+        // Manage pagination
+        if (totalRecord != 0 && totalRecord % pageSize == 0 && pageIndex > totalRecord / pageSize)
+        {
+            pageIndex--;
+        }
+
+        IEnumerable<T> records = await orderBy(query).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+
+        return (records, totalRecord, pageIndex,pageSize);
+    }
+
     // GET ENTITY BY ID
     public virtual async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
-    
-    public virtual async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter){
+
+    public virtual async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter)
+    {
         return await _dbSet.Where(filter).FirstOrDefaultAsync();
     }
 
@@ -68,7 +111,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             {
                 Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
             }
-            throw; 
+            throw;
         }
     }
 
@@ -118,7 +161,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             {
                 Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
             }
-            throw; 
+            throw;
         }
     }
 }
