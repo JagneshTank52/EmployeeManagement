@@ -19,6 +19,8 @@ namespace EmployeeManagement.Entities.Shared.Constant
             public static class General
             {
                 public const string Success = "Success";
+                public const string LoginSuccessMessage = "Login successfully";
+                public const string RegisterSuccessMessage = "Login successfully";
             }
         }
 
@@ -51,21 +53,13 @@ namespace EmployeeManagement.Entities.Shared.Constant
                 public static readonly Func<string, string> UpdateError = (entityName) => $"Error occurred while updating {entityName}.";
                 public static readonly Func<string, string> DeleteError = (entityName) => $"Error occurred while deleting {entityName}.";
                 public static readonly Func<string, string> NotExists = (entityName) => $"The given {entityName} does not exist. Please verify the {entityName} and try again.";
-                public const string InvalidEmailMessage = "Invalid email. Please enter a valid one.";
-                public static readonly Func<string, string> RequiredFieldMessage = (fieldName) => $"{fieldName} is required.";
-                public static readonly Func<string, int, string> MaxLengthExceededMessage = (fieldName, maxLength) => $"{fieldName} must not exceed {maxLength} characters.";
                 public static readonly Func<string, string> AlreadyExistMessage = (entityName) => $"{entityName} is already exist.";
                 public static readonly Func<string, string, string, string> AlreadyExistsWithAttributeMessage = (entityName, attribute, value) => $"{entityName} with this {attribute}({value}) already exists.";
                 public static readonly Func<string, int, string, string> HttpClientRequestFailedMessage = (url, statusCode, message) => $"Request to '{url}' failed with status code {statusCode}: {message}";
-                public static readonly Func<string, string[], string> InvalidFileTypeMessage = (fieldName, allowedExtensions) => $"{fieldName} must be a valid file of type: {string.Join(", ", allowedExtensions)}.";
-                public static readonly Func<string, long, string> MaxFileSizeExceededMessage = (fieldName, maxSizeBytes) =>
-                {
-                    long maxSizeMb = maxSizeBytes / (1024 * 1024);
-                    return $"{fieldName} must not exceed {maxSizeMb} MB.";
-                };
                 public static readonly Func<string, string[], string> InvalidEnumValueMessage = (fieldName, allowedValues) => $"{fieldName} must be one of the following values: {string.Join(", ", allowedValues)}.";
                 public const string InvalidDeserializationMessage = "Response content is null or cannot be deserialized.";
-                public const string EmptyHubName = "Hub name is empty or not provided.";
+                public const string validationError = "Validation faild"; 
+    
             }
 
             /// <summary>

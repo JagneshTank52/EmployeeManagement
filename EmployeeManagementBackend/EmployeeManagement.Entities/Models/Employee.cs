@@ -7,9 +7,9 @@ public partial class Employee
 {
     public int Id { get; set; }
 
-    public string? FirstName { get; set; }
+    public string FirstName { get; set; } = null!;
 
-    public string? LastName { get; set; }
+    public string LastName { get; set; } = null!;
 
     public string? UserName { get; set; }
 
@@ -19,7 +19,7 @@ public partial class Employee
 
     public string HashPassword { get; set; } = null!;
 
-    public int RoleId { get; set; }
+    public int? RoleId { get; set; }
 
     public string? PhoneNumber { get; set; }
 
@@ -29,7 +29,7 @@ public partial class Employee
 
     public string? Address { get; set; }
 
-    public int DepartmentId { get; set; }
+    public int? DepartmentId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
@@ -37,9 +37,9 @@ public partial class Employee
 
     public bool IsDeleted { get; set; }
 
-    public virtual Department Department { get; set; } = null!;
+    public virtual Department? Department { get; set; }
 
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
-    public virtual Role Role { get; set; } = null!;
+    public virtual Role? Role { get; set; }
 }

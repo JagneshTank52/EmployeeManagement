@@ -78,6 +78,7 @@ public partial class EmpManagementContext : DbContext
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(20)
                 .IsUnicode(false);
+            entity.Property(e => e.RoleId).HasDefaultValue(2);
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
             entity.Property(e => e.UserName)
                 .HasMaxLength(255)
@@ -85,18 +86,16 @@ public partial class EmpManagementContext : DbContext
 
             entity.HasOne(d => d.Department).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.DepartmentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employee__Depart__04E4BC85");
+                .HasConstraintName("FK_Employee_DepartmentId");
 
             entity.HasOne(d => d.Role).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Employee__RoleId__05D8E0BE");
+                .HasConstraintName("FK_Employee_RoleId");
         });
 
         modelBuilder.Entity<RefreshToken>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__RefreshT__3214EC076EE4FA19");
+            entity.HasKey(e => e.Id).HasName("PK__RefreshT__3214EC0724BDD805");
 
             entity.ToTable("RefreshToken");
 
@@ -111,7 +110,7 @@ public partial class EmpManagementContext : DbContext
             entity.HasOne(d => d.Employee).WithMany(p => p.RefreshTokens)
                 .HasForeignKey(d => d.EmployeeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__RefreshTo__Emplo__1CBC4616");
+                .HasConstraintName("FK__RefreshTo__Emplo__2B0A656D");
         });
 
         modelBuilder.Entity<Role>(entity =>

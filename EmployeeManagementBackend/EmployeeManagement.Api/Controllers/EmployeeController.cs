@@ -82,8 +82,7 @@ public class EmployeeController : ControllerBase
     {
         if (!ModelState.IsValid)
         {
-            var validationDetails = ValidationConvertor.ConvertModelStateToValidationDetails(ModelState);
-            throw new DataValidationException(validationDetails, "validation failed");
+            throw ValidationConvertor.CreateValidationException(ModelState);
         }
 
         EmployeeDetailDTO? createdEmployeeDetails = await _employeeService.AddEmployee(newEmployee) ?? throw new DataConflictException("Employee with this email already exists");
@@ -124,7 +123,7 @@ public class EmployeeController : ControllerBase
 
         EmployeeDetailDTO? updatedEmployeeDetails = await _employeeService.UpdateEmployee(updatedEmployee);
 
-        if(updatedEmployeeDetails == null)
+        if (updatedEmployeeDetails == null)
         {
             throw new DataNotFoundException($"Employee with ID {id} not found or could not be updated");
         }
@@ -143,10 +142,10 @@ public class EmployeeController : ControllerBase
     /// <remarks>
     /// **Route:** DELETE /api/Employee/{id}
     /// </remarks>
-    [HttpDelete("{id}")]        
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
-        EmployeeDetailDTO? employee =  await _employeeService.GetEmployeeById(id);
+        EmployeeDetailDTO? employee = await _employeeService.GetEmployeeById(id);
 
         if (employee == null)
         {

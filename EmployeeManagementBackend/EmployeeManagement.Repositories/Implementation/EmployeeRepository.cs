@@ -11,18 +11,21 @@ namespace EmployeeManagement.Repositories.Implementation;
 
 public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
 {
- 
-    public EmployeeRepository(EmpManagementContext context) : base(context){}
 
-    public override async Task<Employee?> AddAsync(Employee entity)
+    public EmployeeRepository(EmpManagementContext context) : base(context) { }
+
+    public async Task<Employee?> AddEmployeeAsync(Employee entity)
     {
-        Employee? addedEmployee = await base.AddAsync(entity);
+        await _dbSet.AddAsync(entity);
+        await _context.SaveChangesAsync();
 
-        if(addedEmployee == null)
+        Employee? addedEmployee = entity;
+
+        if (addedEmployee == null)
         {
             return null;
         }
-        
+
         var employeeWithDetails = await _dbSet
             .Include(e => e.Department)
             .Include(e => e.Role)
@@ -33,15 +36,15 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
     public override async Task<Employee?> UpdateAsync(Employee entity, Func<Employee, bool> checkUniquePredicate = null)
     {
         Employee? updatedEmployee = await base.UpdateAsync(entity, checkUniquePredicate);
-        
+
         if (updatedEmployee == null)
         {
             return null;
         }
 
         var employeeWithDetails = await _dbSet
-            .Include(e => e.Department) 
-            .Include(e => e.Role)      
+            .Include(e => e.Department)
+            .Include(e => e.Role)
             .FirstOrDefaultAsync(e => e.Id == updatedEmployee.Id && !e.IsDeleted);
 
         return employeeWithDetails;

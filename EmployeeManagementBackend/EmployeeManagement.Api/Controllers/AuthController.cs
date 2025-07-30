@@ -1,9 +1,9 @@
 using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Shared.Constant;
+using EmployeeManagement.Entities.Shared.Convertor;
 using EmployeeManagement.Services.Auth.DTO;
 using EmployeeManagement.Services.DTO.Auth;
-using EmployeeManagement.Services.Implementations;
 using EmployeeManagement.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Api.Controllers;
@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
     }
 
     /// <summary>
-    /// Authenticates user and returns access/refresh tokens
+    /// Authenticates user and returns access and refresh tokens
     /// </summary>
     /// <param name="loginRequest">Login credentials</param>
     /// <returns>SuccessResponse with auth tokens or ErrorResponse if authentication fails</returns>
@@ -37,10 +37,28 @@ public class AuthController : ControllerBase
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
 
-        return Ok(SuccessResponse<AuthResponseDTO>.Create(
+        return Ok( new SuccessResponse<AuthResponseDTO>(
             data: result,
-            message: "Login successful"
+            message: Messages.Success.General.LoginSuccessMessage
         ));
+    }
+
+    /// <summary>
+    /// Registers a new user with the provided registration data.
+    /// </summary>
+    /// <param name="registerRequest">The registration request DTO containing user details.</param>
+    /// <returns>
+    /// A 201 Created response with a success message if registration is successful.
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterRequestDTO registerRequest)
+    {
+        await _authService.RegisterAsync(registerRequest);
+
+        return Ok( new SuccessResponse<Object?>(
+            data: null,
+            message: Messages.Success.General.RegisterSuccessMessage,
+            statusCode: (int)Enums.EmpStatusCode.Created
+            ));
     }
 
     /// <summary>
@@ -50,11 +68,11 @@ public class AuthController : ControllerBase
     [HttpPost("refresh-token")]
     public async Task<ActionResult<SuccessResponse<AuthResponseDTO>>> RefreshToken()
     {
-        var refreshToken = Request.Cookies["RefreshToken"];
+        string? refreshToken = Request.Cookies["RefreshToken"];
 
         if (string.IsNullOrEmpty(refreshToken))
         {
-            throw new UnauthorizedAccessException("No refresh token found");
+            throw new UnauthorizedAccessException(Messages.Error.Auth.TokenExpired);
         }
 
         var result = await _authService.RefreshTokenAsync(refreshToken);
@@ -89,7 +107,7 @@ public class AuthController : ControllerBase
 
         bool result = await _authService.LogoutAsync(refreshToken);
 
-        Response.Cookies.Delete("RefreshToken");    
+        Response.Cookies.Delete("RefreshToken");
 
         return Ok(SuccessResponse<bool>.Create(
             data: result,

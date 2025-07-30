@@ -20,7 +20,7 @@ public interface IGenericRepository<T> where T: class
     // GET ENTITY BY ID
     Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter);
     public Task<T?> GetByIdAsync(int id);
-    public Task<T?> AddAsync(T entity);
+    public Task AddAsync(T entity);
     public Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null);
     public Task DeleteAsync(T entity);
 }

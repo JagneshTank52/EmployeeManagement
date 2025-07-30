@@ -96,13 +96,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
 
     // Add Async
-    public virtual async Task<T?> AddAsync(T entity)
+    public virtual async Task AddAsync(T entity)
     {
         try
         {
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
-            return entity;
         }
         catch (Exception ex)
         {

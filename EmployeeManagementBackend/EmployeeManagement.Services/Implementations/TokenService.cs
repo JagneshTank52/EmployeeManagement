@@ -3,11 +3,9 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using EmployeeManagement.Entities.Models;
-using EmployeeManagement.Repositories.Implementation;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EmployeeManagement.Services.Implementations;
@@ -30,16 +28,11 @@ public class TokenService : ITokenService
                 new Claim(ClaimTypes.NameIdentifier, employee.Id.ToString()),
                 new Claim(ClaimTypes.Name, employee.UserName ?? employee.Email),
                 new Claim(ClaimTypes.Email, employee.Email),
-                new Claim(ClaimTypes.Role, employee.Role.RoleName),
+                new Claim(ClaimTypes.Role, employee.Role!.RoleName),
                 // new Claim(ClaimTypes.Uri,user.ProfileImage!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-        double expireMinute;
-        if (!double.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out expireMinute))
-        {
-            expireMinute = 10;
-        }
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:SecretKey"]!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -47,7 +40,7 @@ public class TokenService : ITokenService
             issuer: _config["JwtSettings:Issuer"],
             audience: _config["JwtSettings:Audience"],
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(expireMinute),
+            expires: DateTime.UtcNow.AddMinutes(double.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out double expireMinute) ? expireMinute : 10 ),
             signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -74,27 +67,18 @@ public class TokenService : ITokenService
         }
     }
 
-    public async Task<string> SaveRefreshTokenAsync(int employeeId, string refreshToken)
+    public async Task SaveRefreshTokenAsync(int employeeId, string refreshToken)
     {
-        double expireDays;
-        if (!double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out expireDays))
-        {
-            expireDays = 1;
-        }
-
         var refreshTokenEntity = new RefreshToken
         {
             Token = refreshToken,
-            // note - here you can playwith time also
-            ExpiryDate = DateTime.UtcNow.AddDays(expireDays),
+            ExpiryDate = DateTime.UtcNow.AddDays(double.TryParse(_config["JwtSettings:RefreshTokenExpirationDays"], out double expireDays) ? expireDays : 7),
             IsRevoked = false,
             EmployeeId = employeeId,
             CreatedAt = DateTime.UtcNow
         };
 
-        // Here corrct the logic if it is not found
-        RefreshToken? token = await _authRepository.AddAsync(refreshTokenEntity);
-        return token!.Token;
+        await _authRepository.AddAsync(refreshTokenEntity);
     }
 
     public async Task<bool> UpdateRefreshToken(RefreshToken refreshTokenEntity,string newRefreshToken){
@@ -106,9 +90,7 @@ public class TokenService : ITokenService
         if(updatedRefreshToken == null){
             return false;
         }
-
         return true;
-
     }
 
     public async Task<RefreshToken?> ValidateRefreshTokenAsync(string refreshToken)

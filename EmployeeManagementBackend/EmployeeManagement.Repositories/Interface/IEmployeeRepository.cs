@@ -6,5 +6,5 @@ public interface IEmployeeRepository : IGenericRepository<Employee>
 {
     public Task<bool> EmployeeExistsByEmail(string email);
     public Task<Employee?> GetEmployeeByEmail(string email);
-    // public Task<int> AddCustomer (Employee newEmployee);
+    Task<Employee?> AddEmployeeAsync(Employee entity);
 }

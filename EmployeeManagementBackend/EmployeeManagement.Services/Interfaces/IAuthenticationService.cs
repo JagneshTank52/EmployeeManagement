@@ -14,6 +14,8 @@ public interface IAuthenticationService
     /// <exception cref="UnauthorizedAccessException">Thrown when credentials are invalid</exception>
     Task<AuthResponseDTO> LoginAsync(LoginRequestDTO loginRequest);
 
+    Task RegisterAsync(RegisterRequestDTO request);
+
     /// <summary>
     /// Logs out user by revoking refresh token
     /// </summary>

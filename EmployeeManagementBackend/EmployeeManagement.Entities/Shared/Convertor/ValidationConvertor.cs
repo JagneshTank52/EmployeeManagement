@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Shared.Constant;
 using EmployeeManagement.Entities.Shared.ExceptionHandling;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -17,6 +18,18 @@ namespace EmployeeManagement.Entities.Shared.Convertor
 
     public static class ValidationConvertor
     {
+        public static IActionResult CreateValidationErrorResponse(ActionContext context, bool isDev)
+        {
+            var validationErrors = ConvertModelStateToValidationDetails(context.ModelState);
+
+            var errorResponse = new ErrorResponse(
+                errors: validationErrors,
+                message: Messages.Error.General.validationError,
+                statusCode: 400
+            );
+
+            return new BadRequestObjectResult(errorResponse);
+        }
 
         /// <summary>
         /// Converts ModelState errors to ValidationDetailModel list
@@ -36,9 +49,11 @@ namespace EmployeeManagement.Entities.Shared.Convertor
                 {
                     foreach (var error in errors)
                     {
+                        var inputName = string.IsNullOrWhiteSpace(propertyName) ? "RequestBody" : propertyName;
+
                         validationErrors.Add(new ValidationDetailModel
                         {
-                            InputName = propertyName,
+                            InputName = inputName,
                             ValidationMessage = error.ErrorMessage
                         });
                     }
@@ -65,16 +80,6 @@ namespace EmployeeManagement.Entities.Shared.Convertor
             );
 
             return new DataValidationException(validationDetails, message);
-        }
-
-        /// <summary>
-        /// Checks if ModelState has any validation errors
-        /// </summary>
-        /// <param name="modelState">The ModelState to check</param>
-        /// <returns>True if there are validation errors, false otherwise</returns>
-        public static bool HasValidationErrors(ModelStateDictionary modelState)
-        {
-            return !modelState.IsValid;
         }
 
         /// <summary>

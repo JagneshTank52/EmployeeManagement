@@ -91,14 +91,12 @@ namespace EmployeeManagement.Api.Middlewares
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
 
-            var (error, message, details) = GetExceptionInfo(exception);
+            var (error, message) = GetExceptionInfo(exception);
 
-            // Create ErrorResponse using inheritance
-            var errorResponse = ErrorResponse.Create(
-                error: error,
+            var errorResponse = new ErrorResponse(
+                errors: error,
                 message: message,
-                statusCode: (int)statusCode,
-                details: details
+                statusCode: (int)statusCode
             );
 
             await context.Response.WriteAsync(errorResponse.ToString());
@@ -109,49 +107,37 @@ namespace EmployeeManagement.Api.Middlewares
         /// </summary>
         /// <param name="exception"></param>
         /// <returns>Tuple of error type, message, and details</returns>
-        private static (string error, string? message, object? details) GetExceptionInfo(Exception exception)
+        private static (string? error, string message) GetExceptionInfo(Exception exception)
         {
             return exception switch
             {
-                DataValidationException dvEx => (
-                    Messages.Error.Exception.DataValidationErrorMessage,
-                    "One or more validation errors occurred",
-                    dvEx.Error
-                ),
                 UnauthorizedAccessException uaEx => (
                     Messages.Error.Exception.UnauthorizedErrorMessage,
-                    uaEx.Message ?? "Access denied",
-                    null
+                    uaEx.Message ?? "Access denied"
                 ),
                 BadHttpRequestException brEx => (
                     Messages.Error.Exception.BadRequestErrorMessage,
-                    brEx.Message ?? "Bad request",
-                    null
+                    brEx.Message ?? "Bad request"
                 ),
                 DataNotFoundException dnEx => (
                     Messages.Error.Exception.DataNotFoundExceptionMessage,
-                    dnEx.Message ?? "Requested data not found",
-                    null
+                    dnEx.Message ?? "Requested data not found"
                 ),
                 DataConflictException dcEx => (
                     Messages.Error.Exception.DataConflictExceptionMessage,
-                    dcEx.Message ?? "Data conflict occurred",
-                    null
+                    dcEx.Message ?? "Data conflict occurred"
                 ),
                 InvalidOperationException ioEx => (
                     Messages.Error.Exception.InvalidOperationExceptionMessage,
-                    ioEx.Message ?? "Invalid operation",
-                    null
+                    ioEx.Message ?? "Invalid operation"
                 ),
                 HttpRequestFailedException hrEx => (
-                    "HTTP request failed",
-                    hrEx.Message,
-                    hrEx.ResponseContent
+                    hrEx.ResponseContent,
+                    hrEx.Message
                 ),
                 _ => (
                     Messages.Error.Exception.InternalServerErrorMessage ?? "Internal server error",
-                    exception.Message ?? "An unexpected error occurred",
-                    null
+                    exception.Message ?? "An unexpected error occurred"
                 )
             };
         }

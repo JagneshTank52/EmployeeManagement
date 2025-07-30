@@ -83,7 +83,7 @@ public class EmployeeService : IEmployeeService
         newEmployee.CreatedAt = DateTime.UtcNow;
         newEmployee.HashPassword = employeeDto.Password;
 
-        Employee addedEmployee = await _employeeRepository.AddAsync(newEmployee);
+        Employee? addedEmployee = await _employeeRepository.AddEmployeeAsync(newEmployee);
 
         return (
             _mapper.Map<EmployeeDetailDTO>(addedEmployee)

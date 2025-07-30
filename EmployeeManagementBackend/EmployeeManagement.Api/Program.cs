@@ -2,6 +2,7 @@ using System.Text;
 using EmployeeManagement.Api.Middlewares;
 using EmployeeManagement.Entities.Data;
 using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Shared.Convertor;
 using EmployeeManagement.Repositories.Implementation;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.Helpers;
@@ -9,6 +10,7 @@ using EmployeeManagement.Services.Implementation;
 using EmployeeManagement.Services.Implementations;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog.Web;
@@ -60,6 +62,15 @@ builder.Services.AddAuthentication(options =>
 
 });
 builder.Services.AddAuthorization();
+
+// for returning validation error in ApiResponse Formate
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    var isDev = builder.Environment.IsDevelopment();
+
+    options.InvalidModelStateResponseFactory = context =>
+        ValidationConvertor.CreateValidationErrorResponse(context, isDev);
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
