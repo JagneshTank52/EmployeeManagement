@@ -18,4 +18,6 @@ public partial class Role
     public bool IsDeleted { get; set; }
 
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+
+    public virtual ICollection<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
 }

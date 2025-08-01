@@ -14,11 +14,10 @@ namespace EmployeeManagement.Entities.Shared.Constant
         /// </summary>
         public enum EmpStatusCode
         {
-            ModelStateError = -1,
             Ok = 200,
             Created = 201,
             BadRequest = 400,
-            NotFound = 404, 
+            NotFound = 404,
             ServerError = 500,
             UnAuthorized = 401,
             AccessDenied = 403,
@@ -27,41 +26,14 @@ namespace EmployeeManagement.Entities.Shared.Constant
         }
 
         /// <summary>
-        /// Enumeration for user caching times in minutes.
-        /// </summary>
-        //public enum UserCachingTime
-        //{
-        //    VeryShort = 2,
-        //    SemiShort = 5,
-        //    Short = 10,
-        //    Medium = 30,
-        //    Long = 60,
-        //    SemiLong = 90,
-        //    VeryLong = 180
-        //}
-
-
-        /// <summary>
-        /// Enumeration for log types with descriptions.
-        /// </summary>
-        //public enum LogType
-        //{
-        //    [Description("Information")]
-        //    Info = 1,
-        //    [Description("Error")]
-        //    Error = 2
-        //}
-
-
-        /// <summary>
         /// Enumeration for UserRoles
         /// </summary>
         //public enum UserRoles : short
         //{
-        //    [Description("Super Admin")]
+        //    [Description("Admin")]
         //    SuperAdmin = 1,
 
-        //    [Description("Organization Admin")]
+        //    [Description("User")]
         //    OrganizationAdmin = 2,
         //}
 
@@ -85,5 +57,20 @@ namespace EmployeeManagement.Entities.Shared.Constant
         //    [Description("Delete")]
         //    Delete,
         //}
+
+        public enum Permission
+        {
+            Department,
+            Project,
+            Attendance,
+            Employee
+        }
+
+        public enum PermissionType
+        {
+            Read,
+            Write,
+            Delete
+        }
     }
 }

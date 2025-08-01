@@ -29,17 +29,9 @@ public class AuthController : ControllerBase
     {
         var result = await _authService.LoginAsync(loginRequest);
 
-        Response.Cookies.Append("RefreshToken", result.RefreshToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.None,
-            Expires = DateTimeOffset.UtcNow.AddDays(7)
-        });
-
         return Ok( new SuccessResponse<AuthResponseDTO>(
             data: result,
-            message: Messages.Success.General.LoginSuccessMessage
+            message: Messages.Success.General.AuthSuccess("Login")
         ));
     }
 
@@ -56,7 +48,7 @@ public class AuthController : ControllerBase
 
         return Ok( new SuccessResponse<Object?>(
             data: null,
-            message: Messages.Success.General.RegisterSuccessMessage,
+            message: Messages.Success.General.AuthSuccess("Register"),
             statusCode: (int)Enums.EmpStatusCode.Created
             ));
     }

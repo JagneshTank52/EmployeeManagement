@@ -1,8 +1,9 @@
+using System.Security.Claims;
 using System.Text;
 using EmployeeManagement.Api.Middlewares;
 using EmployeeManagement.Entities.Data;
-using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Entities.Shared.Convertor;
+using EmployeeManagement.Repositories.Helper.Authorization;
 using EmployeeManagement.Repositories.Implementation;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.Helpers;
@@ -10,9 +11,11 @@ using EmployeeManagement.Services.Implementation;
 using EmployeeManagement.Services.Implementations;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +42,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
+        RoleClaimType = ClaimTypes.Role,
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -74,7 +78,35 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+   {
+       c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Employee API", Version = "v1" });
+
+       // Define the security scheme
+       c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+       {
+           Description = "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'",
+           Name = "Authorization",
+           In = ParameterLocation.Header,
+           Type = SecuritySchemeType.ApiKey,
+           Scheme = "Bearer"
+       });
+
+       // Require the bearer token globally
+       c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+       {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new List<string>()
+        }
+       });
+   });
 
 var AllowSpecificOrigins = "_allowSpecificOrigins";
 builder.Services.AddCors(options =>
@@ -82,17 +114,17 @@ builder.Services.AddCors(options =>
     options.AddPolicy(AllowSpecificOrigins,
                       builder =>
                       {
-                          builder.WithOrigins("https://localhost:4200") // <--- Allow your Angular app's origin
-                                 .AllowAnyHeader() // Allow all headers 
-                                 .AllowAnyMethod() // Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
-                                 .AllowCredentials(); // <--- Crucial if you are sending cookies or authentication headers
+                          builder.WithOrigins("http://localhost:4200")
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod()
+                                 .AllowCredentials();
                       });
 });
 
-// Clears built-in providers
-builder.Logging.ClearProviders();
-
 builder.Services.AddAutoMapper(typeof(MappingPeofile));
+builder.Services.AddSingleton<IAuthorizationHandler,PermissionAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationPolicyProvider,PermissionAuthorizationPolicyProvider>();
+
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 
@@ -101,14 +133,15 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+// Clears built-in providers
+builder.Logging.ClearProviders();
 
-// Set NLog as the logging provider for the application.
-// Configures the host to use NLog
+// NLog provider
 builder.Host.UseNLog();
 
 var app = builder.Build();
 
-// IMPORTANT: Add the global exception middleware early in the pipeline
+// Global exception middleware pipeline
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.

@@ -12,9 +12,6 @@ public class PasswordHelper
 
     public static string HashPassword(string password)
     {
-        // if (string.IsNullOrWhiteSpace(password))
-        //     throw new ArgumentException("Password cannot be null or empty.", nameof(password));
-
         byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
 
         byte[] hash = KeyDerivation.Pbkdf2(

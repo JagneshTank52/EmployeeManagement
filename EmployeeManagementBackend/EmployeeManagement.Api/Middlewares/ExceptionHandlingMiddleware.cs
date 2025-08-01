@@ -6,7 +6,7 @@ using System.Net;
 
 namespace EmployeeManagement.Api.Middlewares
 {
-    public class ExceptionHandlingMiddleware 
+    public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
@@ -32,6 +32,11 @@ namespace EmployeeManagement.Api.Middlewares
             {
                 _logger.LogWarning(uaEx, "Unauthorized access.");
                 await HandleExceptionAsync(httpContext, uaEx, HttpStatusCode.Unauthorized);
+            }
+            catch (ForbiddenAccessException faEx) // 🔄 Added
+            {
+                _logger.LogWarning(faEx, "Access forbidden.");
+                await HandleExceptionAsync(httpContext, faEx, HttpStatusCode.Forbidden); // 🔄 403
             }
             catch (DataValidationException dvEx)
             {
@@ -115,6 +120,10 @@ namespace EmployeeManagement.Api.Middlewares
                     Messages.Error.Exception.UnauthorizedErrorMessage,
                     uaEx.Message ?? "Access denied"
                 ),
+                ForbiddenAccessException faEx => ( // 🔄 Added
+                   Messages.Error.Exception.ForbiddenAccessExceptionMessage ?? "Forbidden access",
+                   faEx.Message ?? "You do not have access"
+               ),
                 BadHttpRequestException brEx => (
                     Messages.Error.Exception.BadRequestErrorMessage,
                     brEx.Message ?? "Bad request"

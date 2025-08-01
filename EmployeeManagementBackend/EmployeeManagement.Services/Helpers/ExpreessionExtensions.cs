@@ -8,7 +8,7 @@ public static class ExpreessionExtensions
         this Expression<Func<T, bool>> expr1,
         Expression<Func<T, bool>> expr2
     )
-
+    
     {
         var param = Expression.Parameter(typeof(T));
         var body = Expression.AndAlso(Expression.Invoke(expr1, param), Expression.Invoke(expr2, param));

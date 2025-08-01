@@ -17,24 +17,6 @@ namespace EmployeeManagement.Entities.Shared.ExceptionHandling
         public HttpStatusCode StatusCode { get; private set; }
         public IList<ValidationDetailModel> Error { get; private set; }
 
-        // Constructor for FluentValidation (if you ever want to use it)
-        //public DataValidationException(IEnumerable<ValidationFailure> validationFailures, string message = "") : base(message)
-        //{
-        //    StatusCode = HttpStatusCode.BadRequest;
-        //    Error = validationFailures.Select(ex => new ValidationDetailModel
-        //    {
-        //        InputName = ex.PropertyName,
-        //        ValidationMessage = ex.ErrorMessage
-        //    }).ToList();
-        //}
-
-        // Constructor for Data Annotations / Custom validation
-        public DataValidationException(IEnumerable<ValidationDetailModel> validationDetails, string message = "") : base(message)
-        {
-            StatusCode = HttpStatusCode.BadRequest;
-            Error = validationDetails.ToList();
-        }
-
         // Constructor for single validation error
         public DataValidationException(string propertyName, string errorMessage, string message = "") : base(message)
         {
@@ -47,17 +29,6 @@ namespace EmployeeManagement.Entities.Shared.ExceptionHandling
                     ValidationMessage = errorMessage
                 }
             };
-        }
-
-        // Constructor for generic validation with multiple errors
-        public DataValidationException(Dictionary<string, string> errors, string message = "") : base(message)
-        {
-            StatusCode = HttpStatusCode.BadRequest;
-            Error = errors.Select(kvp => new ValidationDetailModel
-            {
-                InputName = kvp.Key,
-                ValidationMessage = kvp.Value
-            }).ToList();
         }
     }
 
@@ -91,6 +62,21 @@ namespace EmployeeManagement.Entities.Shared.ExceptionHandling
         {
             StatusCode = statusCode;
             ResponseContent = responseContent;
+        }
+    }
+
+    /// <summary>
+    /// Custom exception for forbidden (403) access
+    /// </summary>
+    public class ForbiddenAccessException : Exception
+    {
+        public HttpStatusCode StatusCode { get; private set; } = HttpStatusCode.Forbidden;
+        public string Message { get; private set; }
+
+        public ForbiddenAccessException(string message = "Access to the requested resource is forbidden.")
+            : base(message)
+        {
+            Message = message;
         }
     }
 }

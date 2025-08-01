@@ -62,7 +62,6 @@ public class TokenService : ITokenService
         {
             token.IsRevoked = true;
             token.ExpiryDate = DateTime.UtcNow;
-            // Here handle null logic 
             await _authRepository.UpdateAsync(token);
         }
     }

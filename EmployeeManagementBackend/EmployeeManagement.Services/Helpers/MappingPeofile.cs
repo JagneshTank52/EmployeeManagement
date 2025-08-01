@@ -9,7 +9,7 @@ public class MappingPeofile : Profile
 {
     public MappingPeofile()
     {
-        // global mapping use full to conver one data type to other
+        // trim spaces from all data
         CreateMap<string, string>().ConvertUsing((src, dest) => src?.Trim() ?? string.Empty);
 
         // Add Employee DTO
@@ -33,7 +33,7 @@ public class MappingPeofile : Profile
         CreateMap<RegisterRequestDTO, Employee>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
             .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.DateOfBirth)))
-            .ForMember(dest => dest.HashPassword, opt => opt.MapFrom(src => src.Password)) // hash later in service
+            .ForMember(dest => dest.HashPassword, opt => opt.MapFrom(src => src.Password))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
             .ForMember(dest => dest.Id, opt => opt.Ignore()); 
     }

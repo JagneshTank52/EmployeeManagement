@@ -101,7 +101,7 @@ public class EmployeeService : IEmployeeService
 
         if (existingEmployee.Email != employeeDto.Email && await _employeeRepository.EmployeeExistsByEmail(employeeDto.Email))
         {
-            return null; // Another employee already has this email
+            return null; 
         }
 
         _mapper.Map(employeeDto, existingEmployee);

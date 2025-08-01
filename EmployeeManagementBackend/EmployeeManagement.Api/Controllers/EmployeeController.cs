@@ -1,10 +1,10 @@
 
 using EmployeeManagement.Entities.Models;
-using EmployeeManagement.Entities.Shared.Convertor;
+using EmployeeManagement.Entities.Shared.Constant;
 using EmployeeManagement.Entities.Shared.ExceptionHandling;
+using EmployeeManagement.Repositories.Helper.Authorization;
 using EmployeeManagement.Services.DTO;
 using EmployeeManagement.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Api.Controllers;
@@ -24,11 +24,8 @@ public class EmployeeController : ControllerBase
     /// </summary>
     /// <returns>An ActionResult containing a list of EmployeeDetailDTO objects.
     /// </returns>
-    /// <remarks>
-    /// **Route:** GET /api/Employee
-    /// </remarks>
     [HttpGet]
-
+    [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Read)]
     public async Task<IActionResult> GetEmployeeList([FromQuery] PaginationQueryParamater paramater)
     {
         PaginatedList<EmployeeDetailDTO> employees = await _employeeService.GetEmployees(paramater);
@@ -37,7 +34,7 @@ public class EmployeeController : ControllerBase
             (
                 SuccessResponse<PaginatedList<EmployeeDetailDTO>>.Create(
                     data: employees,
-                    message: "Employees retrived successfully"
+                    message: Messages.Success.General.GetSuccess("Employess")
                 )
             );
     }
@@ -47,10 +44,8 @@ public class EmployeeController : ControllerBase
     /// </summary>
     /// <param name="id">The ID of the employee to retrieve.</param>
     /// <returns>An ActionResult containing an EmployeeDetailDTO object or a NotFound result.</returns>
-    /// <remarks>
-    /// **Route:** GET /api/Employee/{id}
-    /// </remarks>
     [HttpGet("{id}")]
+    [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Read)]
     public async Task<IActionResult> GetEmployeeById(int id)
     {
         EmployeeDetailDTO? employee = await _employeeService.GetEmployeeById(id);
@@ -74,16 +69,10 @@ public class EmployeeController : ControllerBase
     /// </summary>
     /// <param name="newEmployee">The data for the new employee, sent in the request body.</param>
     /// <returns>An ActionResult indicating the result of the creation operation.</returns>
-    /// <remarks>
-    /// **Route:** POST /api/Employee
-    /// </remarks>
     [HttpPost]
+    [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Write)]
     public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeDTO newEmployee)
     {
-        if (!ModelState.IsValid)
-        {
-            throw ValidationConvertor.CreateValidationException(ModelState);
-        }
 
         EmployeeDetailDTO? createdEmployeeDetails = await _employeeService.AddEmployee(newEmployee) ?? throw new DataConflictException("Employee with this email already exists");
 
@@ -104,21 +93,13 @@ public class EmployeeController : ControllerBase
     /// <param name="id">The ID of the employee to update, from the route.</param>
     /// <param name="updatedEmployee">The updated employee data, sent in the request body.</param>
     /// <returns>An ActionResult indicating the result of the update operation.</returns>
-    /// <remarks>
-    /// **Route:** PUT /api/Employee/{id}
-    /// </remarks>
     [HttpPut("{id}")]
+    [HasPermission(Enums.Permission.Employee,Enums.PermissionType.Write)]
     public async Task<IActionResult> UpdateEmployee(int id, [FromBody] AddEmployeeDTO updatedEmployee)
     {
         if (id != updatedEmployee.Id)
         {
             throw new DataValidationException("Id", "ID in route does not match ID in request body");
-        }
-
-        if (!ModelState.IsValid)
-        {
-            var validationDetails = ValidationConvertor.ConvertModelStateToValidationDetails(ModelState);
-            throw new DataValidationException(validationDetails, "Validation failed");
         }
 
         EmployeeDetailDTO? updatedEmployeeDetails = await _employeeService.UpdateEmployee(updatedEmployee);
@@ -139,10 +120,8 @@ public class EmployeeController : ControllerBase
     /// </summary>
     /// <param name="id">The ID of the employee to delete.</param>
     /// <returns>An ActionResult indicating the result of the deletion operation.</returns>
-    /// <remarks>
-    /// **Route:** DELETE /api/Employee/{id}
-    /// </remarks>
     [HttpDelete("{id}")]
+    [HasPermission(Enums.Permission.Employee,Enums.PermissionType.Delete)]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
         EmployeeDetailDTO? employee = await _employeeService.GetEmployeeById(id);

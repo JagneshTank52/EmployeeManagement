@@ -4,7 +4,6 @@ using EmployeeManagement.Entities.Shared.Constant;
 using EmployeeManagement.Entities.Shared.ExceptionHandling;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.Auth.DTO;
-using EmployeeManagement.Services.DTO;
 using EmployeeManagement.Services.DTO.Auth;
 using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Interfaces;

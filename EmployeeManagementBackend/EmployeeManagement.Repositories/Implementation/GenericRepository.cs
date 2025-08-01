@@ -115,19 +115,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
 
     // UPDTAE ENTITY
-    public virtual async Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null) // Changed return type to Task<T?>
+    public virtual async Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null) 
     {
         try
         {
             if (checkUniquePredicate != null && _dbSet.Any(checkUniquePredicate))
             {
-                return null; // Unique constraint violation: return null to indicate failure
+                return null; 
             }
 
             _dbSet.Update(entity);
-            await _context.SaveChangesAsync(); // Save changes immediately
-
-            return entity; // Return the updated entity
+            await _context.SaveChangesAsync();
+            return entity; 
         }
         catch (DbUpdateException ex)
         {

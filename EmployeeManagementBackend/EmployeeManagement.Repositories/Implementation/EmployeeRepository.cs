@@ -67,7 +67,6 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
 
     public Task<Employee?> GetEmployeeByEmail(string email)
     {
-        // here you need to also include department
         return _context.Employees.Include(i => i.Role).Include(i => i.Department).FirstOrDefaultAsync(f => f.Email == email && !f.IsDeleted);
     }
 }

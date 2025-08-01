@@ -8,19 +8,13 @@ namespace EmployeeManagement.Entities.Shared.Constant
 {
     public class Messages
     {
-        /// <summary>
-        /// Success messages
-        /// </summary>
         public static class Success
         {
-            /// <summary>
-            /// General success messages
-            /// </summary>
             public static class General
             {
                 public const string Success = "Success";
-                public const string LoginSuccessMessage = "Login successfully";
-                public const string RegisterSuccessMessage = "Login successfully";
+                public static readonly Func<string, string> AuthSuccess = (entityName) => $"{entityName} successfully.";
+                public static readonly Func<string, string> GetSuccess = (entityName) => $"{entityName} fetched successfully.";
             }
         }
 
@@ -30,6 +24,7 @@ namespace EmployeeManagement.Entities.Shared.Constant
             {
                 public const string InternalServerErrorMessage = "An Error has occurred, and we are working to fix the problem! We will be up and running shortly";
                 public const string UnauthorizedErrorMessage = "You are not authorized to perform this action. Please contact your administrator.";
+                public const string ForbiddenAccessExceptionMessage = "You do not have permission to access this resource.";
                 public const string BadRequestErrorMessage = "We couldn't process your request. Please try again later";
                 public const string DataValidationErrorMessage = "One or more validation error occurred.";
                 public const string DataNotFoundExceptionMessage = "Data not found.";
@@ -39,6 +34,9 @@ namespace EmployeeManagement.Entities.Shared.Constant
 
             public static class General
             {
+                public static string PermissionNotAssignedMessage = "Permission not assigned to this role.";
+                public static readonly Func<string, string, string> ForbiddenPermissionMessage =
+                    (permissionType, permission) => $"You do not have {permissionType} permission for {permission}.";
                 public static readonly Func<string, string> NotFoundMessage = (entityName) => $"{entityName} not found.";
                 public static readonly Func<string, string> ConflictMessage = (entityName) => $"{entityName} with same name already present.";
                 public static readonly Func<string, string[], string> DeleteConflictDueToRelationsMessage = (parentEntity, childEntities) =>
@@ -58,13 +56,10 @@ namespace EmployeeManagement.Entities.Shared.Constant
                 public static readonly Func<string, int, string, string> HttpClientRequestFailedMessage = (url, statusCode, message) => $"Request to '{url}' failed with status code {statusCode}: {message}";
                 public static readonly Func<string, string[], string> InvalidEnumValueMessage = (fieldName, allowedValues) => $"{fieldName} must be one of the following values: {string.Join(", ", allowedValues)}.";
                 public const string InvalidDeserializationMessage = "Response content is null or cannot be deserialized.";
-                public const string validationError = "Validation faild"; 
-    
+                public const string validationError = "Validation faild";
+
             }
 
-            /// <summary>
-            /// Auth service related error messages
-            /// </summary>
             public static class Auth
             {
                 public const string InvalidPasswordMessage = "Incorrect credential. Please try again.";
@@ -72,14 +67,6 @@ namespace EmployeeManagement.Entities.Shared.Constant
                 public const string InvalidJwtRefreshToken = "Invalid or expired refresh token.";
                 public static readonly Func<string, string> MissingClaimMessage = (claimName) => $"{claimName} claim is missing in the token.";
             }
-
-            /// <summary>
-            /// Organization service related error messages
-            /// </summary>
-            //public static class Org
-            //{
-            //    public static readonly Func<string, string> DatabaseCreationErrorMessage = (OrganizationName) => $"Unexpected error when creating organization database for {OrganizationName}";
-            //}
         }
 
     }
