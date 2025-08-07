@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using EmployeeManagement.Entities.Models;
 
 namespace EmployeeManagement.Services.Interfaces;
@@ -9,5 +10,6 @@ public interface ITokenService
     Task SaveRefreshTokenAsync(int employeeId, string refreshToken);
     Task<bool> UpdateRefreshToken(RefreshToken refreshTokenEntity, string newRefreshToken);
     Task<RefreshToken?> ValidateRefreshTokenAsync(string refreshToken);
+    ClaimsPrincipal ValidateAccessToken(string token, bool validateLifetime = true);
     Task RevokeRefreshTokenAsync(string refreshToken);
 }

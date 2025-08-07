@@ -10,6 +10,7 @@ using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Implementation;
 using EmployeeManagement.Services.Implementations;
 using EmployeeManagement.Services.Interfaces;
+using EmployeeManagement.Services.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
         ClockSkew = TimeSpan.Zero // Remove default 5-minute clock skew
     };
+    
     // options.Events = new JwtBearerEvents
     // {
     //     OnMessageReceived = context =>
@@ -121,12 +123,13 @@ builder.Services.AddCors(options =>
                       });
 });
 
-builder.Services.AddAutoMapper(typeof(MappingPeofile));
+builder.Services.AddAutoMapper(typeof(IAutoMapper).Assembly);
 builder.Services.AddSingleton<IAuthorizationHandler,PermissionAuthorizationHandler>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider,PermissionAuthorizationPolicyProvider>();
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();

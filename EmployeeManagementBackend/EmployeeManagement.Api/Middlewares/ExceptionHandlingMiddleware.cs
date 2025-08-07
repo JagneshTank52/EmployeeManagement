@@ -10,11 +10,13 @@ namespace EmployeeManagement.Api.Middlewares
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        private readonly IHostEnvironment _env;
 
-        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
+        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger,IHostEnvironment env)
         {
             _next = next;
             _logger = logger;
+            _env = env;
         }
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace EmployeeManagement.Api.Middlewares
                     Messages.Error.Exception.UnauthorizedErrorMessage,
                     uaEx.Message ?? "Access denied"
                 ),
-                ForbiddenAccessException faEx => ( // 🔄 Added
+                ForbiddenAccessException faEx => (
                    Messages.Error.Exception.ForbiddenAccessExceptionMessage ?? "Forbidden access",
                    faEx.Message ?? "You do not have access"
                ),

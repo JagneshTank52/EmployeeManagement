@@ -68,15 +68,7 @@ public class AuthController : ControllerBase
         }
 
         var result = await _authService.RefreshTokenAsync(refreshToken);
-
-        Response.Cookies.Append("RefreshToken", result.RefreshToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.None,
-            Expires = result.ExpiresIn
-        });
-
+        
         return Ok(SuccessResponse<AuthResponseDTO>.Create(
             data: result,
             message: "Token refreshed successfully"

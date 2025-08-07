@@ -79,4 +79,8 @@ namespace EmployeeManagement.Entities.Shared.ExceptionHandling
             Message = message;
         }
     }
+
+
+
+    
 }

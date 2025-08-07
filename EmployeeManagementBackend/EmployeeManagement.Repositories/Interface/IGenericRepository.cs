@@ -18,9 +18,10 @@ public interface IGenericRepository<T> where T: class
     );
 
     // GET ENTITY BY ID
-    Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter);
+    Task<T?> GetFirstOrDefaultAsync(Expression<Func<T,bool>> filter,Func<IQueryable<T>, IQueryable<T>>? include);
     public Task<T?> GetByIdAsync(int id);
     public Task AddAsync(T entity);
+    Task AddRangeAsync(IEnumerable<T> entities);
     public Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null);
     public Task DeleteAsync(T entity);
 }

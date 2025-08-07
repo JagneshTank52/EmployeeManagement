@@ -3,8 +3,10 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Shared.Constant;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,11 +16,20 @@ public class TokenService : ITokenService
 {
     private readonly IConfiguration _config;
     private readonly IAuthenticationRepository _authRepository;
+    private readonly IJwtProvider _jwtProvider;
+    private readonly string[] _allowedAlgorithms = new[]
+   {
+        SecurityAlgorithms.HmacSha256,
+        SecurityAlgorithms.RsaSha256,
+        SecurityAlgorithms.EcdsaSha256
+    };
 
-    public TokenService(IAuthenticationRepository authRepository, IConfiguration configuration)
+
+    public TokenService(IAuthenticationRepository authRepository, IConfiguration configuration, IJwtProvider jwtProvider)
     {
         _authRepository = authRepository;
         _config = configuration;
+        _jwtProvider = jwtProvider;
     }
 
     public string GenerateAccessToken(Employee employee)
@@ -29,7 +40,6 @@ public class TokenService : ITokenService
                 new Claim(ClaimTypes.Name, employee.UserName ?? employee.Email),
                 new Claim(ClaimTypes.Email, employee.Email),
                 new Claim(ClaimTypes.Role, employee.Role!.RoleName),
-                // new Claim(ClaimTypes.Uri,user.ProfileImage!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -40,10 +50,51 @@ public class TokenService : ITokenService
             issuer: _config["JwtSettings:Issuer"],
             audience: _config["JwtSettings:Audience"],
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(double.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out double expireMinute) ? expireMinute : 10 ),
+            expires: DateTime.UtcNow.AddMinutes(double.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out double expireMinute) ? expireMinute : 10),
             signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public ClaimsPrincipal ValidateAccessToken(string token, bool validateLifetime = true)
+    {
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            throw new ArgumentException(Messages.Error.Exception.NullOrEmptyArgumentMessage);
+        }
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        TokenValidationParameters validationParameters = _jwtProvider.GetParameters(validateLifetime);
+
+        try
+        {
+            var principal = tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+
+            if (validatedToken is not JwtSecurityToken jwtToken)
+                throw new SecurityTokenException(Messages.Error.Exception.TokenSignatureInvalidMessage);
+
+            if (!_allowedAlgorithms.Contains(jwtToken.Header.Alg, StringComparer.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException(Messages.Error.Exception.TokenAlgorithmNotSupportedMessage);
+
+            return principal;
+        }
+        catch (SecurityTokenExpiredException)
+        {
+            throw new SecurityTokenException(Messages.Error.Exception.TokenExpiredMessage);
+        }
+        catch (Exception ex) when (
+            ex is SecurityTokenException ||
+            ex is ArgumentException ||
+            ex is FormatException
+        )
+        {
+            throw new SecurityTokenException(Messages.Error.Exception.InvalidTokenMessage);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(Messages.Error.Exception.InternalServerErrorMessage);
+        }
     }
 
     public string GenerateRefreshToken()
@@ -52,6 +103,20 @@ public class TokenService : ITokenService
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
+    }
+
+    public async Task<RefreshToken?> ValidateRefreshTokenAsync(string refreshToken)
+    {
+        var token = await _authRepository.GetRefreshToken(refreshToken);
+
+        if (token != null && token.ExpiryDate > DateTime.UtcNow)
+        {
+            return token;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public async Task RevokeRefreshTokenAsync(string refreshToken)
@@ -80,28 +145,23 @@ public class TokenService : ITokenService
         await _authRepository.AddAsync(refreshTokenEntity);
     }
 
-    public async Task<bool> UpdateRefreshToken(RefreshToken refreshTokenEntity,string newRefreshToken){
-        
+    public async Task<bool> UpdateRefreshToken(RefreshToken refreshTokenEntity, string newRefreshToken)
+    {
+
         refreshTokenEntity.Token = newRefreshToken;
 
         RefreshToken? updatedRefreshToken = await _authRepository.UpdateAsync(refreshTokenEntity);
 
-        if(updatedRefreshToken == null){
+        if (updatedRefreshToken == null)
+        {
             return false;
         }
         return true;
     }
 
-    public async Task<RefreshToken?> ValidateRefreshTokenAsync(string refreshToken)
+    public string GetUserIdFromToken(ClaimsPrincipal principal)
     {
-        var token = await _authRepository.GetRefreshToken(refreshToken);
-
-        if (token != null && token.ExpiryDate > DateTime.UtcNow)
-        {
-            return token;
-        }else{
-            return null;
-        }
+        return principal.FindFirst(ClaimTypes.UserData)?.Value ?? string.Empty;
     }
 
 }

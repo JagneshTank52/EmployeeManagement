@@ -1,14 +1,7 @@
 ﻿using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Entities.Shared.Constant;
-using EmployeeManagement.Entities.Shared.ExceptionHandling;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace EmployeeManagement.Entities.Shared.Convertor
 {
@@ -50,7 +43,6 @@ namespace EmployeeManagement.Entities.Shared.Convertor
                     }
                 }
             }
-
             return validationErrors;
         }
     }

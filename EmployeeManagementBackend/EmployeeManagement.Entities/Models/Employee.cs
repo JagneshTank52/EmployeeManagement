@@ -39,6 +39,12 @@ public partial class Employee
 
     public virtual Department? Department { get; set; }
 
+    public virtual ICollection<ProjectEmployee> ProjectEmployeeEmployees { get; set; } = new List<ProjectEmployee>();
+
+    public virtual ICollection<ProjectEmployee> ProjectEmployeeModifiedByNavigations { get; set; } = new List<ProjectEmployee>();
+
+    public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
+
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
     public virtual Role? Role { get; set; }

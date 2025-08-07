@@ -30,10 +30,20 @@ namespace EmployeeManagement.Entities.Shared.Constant
                 public const string DataNotFoundExceptionMessage = "Data not found.";
                 public const string DataConflictExceptionMessage = "Data conflict exception occurred.";
                 public const string InvalidOperationExceptionMessage = "Invalid operation exception occurred.";
+
+                public const string InvalidTokenMessage = "Invalid or expired security token.";
+                public const string TokenMissingMessage = "Authorization token is missing from the request.";
+                public const string TokenSignatureInvalidMessage = "The token signature is invalid.";
+                public const string TokenAlgorithmNotSupportedMessage = "The token uses an unsupported signing algorithm.";
+                public const string TokenValidationFailedMessage = "Security token validation failed.";
+                public const string TokenExpiredMessage = "Token has expired. Please log in again.";
+                public const string NullOrEmptyArgumentMessage = "A required argument was null or empty.";
+
             }
 
             public static class General
             {
+                
                 public static string PermissionNotAssignedMessage = "Permission not assigned to this role.";
                 public static readonly Func<string, string, string> ForbiddenPermissionMessage =
                     (permissionType, permission) => $"You do not have {permissionType} permission for {permission}.";

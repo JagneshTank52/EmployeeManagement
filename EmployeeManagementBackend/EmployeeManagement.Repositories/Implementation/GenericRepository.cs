@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using EmployeeManagement.Entities.Data;
 using EmployeeManagement.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Repositories.Implementation;
 
@@ -84,49 +85,54 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
         IEnumerable<T> records = await orderBy(query).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
 
-        return (records, totalRecord, pageIndex,pageSize);
+        return (records, totalRecord, pageIndex, pageSize);
     }
 
     // GET ENTITY BY ID
     public virtual async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
-    public virtual async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter)
+    public virtual async Task<T?> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IQueryable<T>>? include = null)
     {
-        return await _dbSet.Where(filter).FirstOrDefaultAsync();
+        IQueryable<T> query = _dbSet;
+
+        if (include is not null)
+            query = include(query);
+
+        return await query.Where(filter).FirstOrDefaultAsync();
     }
 
     // Add Async
     public virtual async Task AddAsync(T entity)
     {
-        try
-        {
-            await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred during AddAsync: {ex.Message}");
-            if (ex.InnerException != null)
-            {
-                Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-            }
-            throw;
-        }
+        if (entity == null)
+            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
+
+        await _dbSet.AddAsync(entity);
+        await _context.SaveChangesAsync();
+    }
+
+    public virtual async Task AddRangeAsync(IEnumerable<T> entities)
+    {
+        if (entities == null || !entities.Any())
+            throw new ArgumentNullException(nameof(entities), "Entity list cannot be null or empty.");
+
+        await _dbSet.AddRangeAsync(entities);
+        await _context.SaveChangesAsync();
     }
 
     // UPDTAE ENTITY
-    public virtual async Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null) 
+    public virtual async Task<T?> UpdateAsync(T entity, Func<T, bool> checkUniquePredicate = null)
     {
         try
         {
             if (checkUniquePredicate != null && _dbSet.Any(checkUniquePredicate))
             {
-                return null; 
+                return null;
             }
 
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
-            return entity; 
+            return entity;
         }
         catch (DbUpdateException ex)
         {

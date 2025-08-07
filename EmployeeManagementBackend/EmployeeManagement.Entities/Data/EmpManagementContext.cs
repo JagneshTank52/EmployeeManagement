@@ -22,11 +22,17 @@ public partial class EmpManagementContext : DbContext
 
     public virtual DbSet<Permission> Permissions { get; set; }
 
+    public virtual DbSet<Project> Projects { get; set; }
+
+    public virtual DbSet<ProjectEmployee> ProjectEmployees { get; set; }
+
     public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<RolePermission> RolePermissions { get; set; }
+
+    public virtual DbSet<Technology> Technologies { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:EmpDatabase");
@@ -113,6 +119,84 @@ public partial class EmpManagementContext : DbContext
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
         });
 
+        modelBuilder.Entity<Project>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Projects__3214EC07C4FAA094");
+
+            entity.HasIndex(e => e.IsDeleted, "IX_Projects_IsDeleted");
+
+            entity.HasIndex(e => e.Code, "IX_Projects_ProjectCode");
+
+            entity.HasIndex(e => e.ProjectStatus, "IX_Projects_ProjectStatus");
+
+            entity.HasIndex(e => e.TechnologyId, "IX_Projects_TechnologyId");
+
+            entity.Property(e => e.Code)
+                .HasMaxLength(8)
+                .IsUnicode(false)
+                .HasComputedColumnSql("('PRJ'+right('00000'+CONVERT([varchar](5),[Id]),(5)))", true);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.EstimatedHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.ProjectStatus)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.StartDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.Type)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+
+            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.Projects)
+                .HasForeignKey(d => d.ModifiedBy)
+                .HasConstraintName("FK_Projects_ModifiedBy");
+
+            entity.HasOne(d => d.Technology).WithMany(p => p.Projects)
+                .HasForeignKey(d => d.TechnologyId)
+                .HasConstraintName("FK_Projects_Technology");
+        });
+
+        modelBuilder.Entity<ProjectEmployee>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ProjectE__3214EC07839BF600");
+
+            entity.ToTable("ProjectEmployee");
+
+            entity.HasIndex(e => e.EmployeeId, "IX_ProjectEmployee_EmployeeId");
+
+            entity.HasIndex(e => e.IsDeleted, "IX_ProjectEmployee_IsDeleted");
+
+            entity.HasIndex(e => e.ProjectId, "IX_ProjectEmployee_ProjectId");
+
+            entity.HasIndex(e => new { e.ProjectId, e.EmployeeId }, "UQ_ProjectEmployee").IsUnique();
+
+            entity.Property(e => e.AssignedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.ProjectEmployeeEmployees)
+                .HasForeignKey(d => d.EmployeeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProjectEmployee_Employee");
+
+            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.ProjectEmployeeModifiedByNavigations)
+                .HasForeignKey(d => d.ModifiedBy)
+                .HasConstraintName("FK_ProjectEmployee_ModifiedBy");
+
+            entity.HasOne(d => d.Project).WithMany(p => p.ProjectEmployees)
+                .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ProjectEmployee_Project");
+        });
+
         modelBuilder.Entity<RefreshToken>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__RefreshT__3214EC0724BDD805");
@@ -167,6 +251,19 @@ public partial class EmpManagementContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RolePermissions_Role");
+        });
+
+        modelBuilder.Entity<Technology>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Technolo__3214EC072D2D5053");
+
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
         });
 
         OnModelCreatingPartial(modelBuilder);

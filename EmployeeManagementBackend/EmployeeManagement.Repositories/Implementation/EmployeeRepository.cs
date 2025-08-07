@@ -33,6 +33,7 @@ public class EmployeeRepository : GenericRepository<Employee>, IEmployeeReposito
 
         return employeeWithDetails!;
     }
+    
     public override async Task<Employee?> UpdateAsync(Employee entity, Func<Employee, bool> checkUniquePredicate = null)
     {
         Employee? updatedEmployee = await base.UpdateAsync(entity, checkUniquePredicate);
