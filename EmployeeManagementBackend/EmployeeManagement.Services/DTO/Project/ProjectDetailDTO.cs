@@ -7,12 +7,12 @@ public class ProjectDetailDTO
     public string? Code { get; set; }
     public string? Type { get; set; }
     public int? TechnologyId { get; set; }
-    public string? TechnologyName { get; set; }
+    public string TechnologyName { get; set; } = string.Empty;
     public string? ProjectStatus { get; set; }
     public DateOnly StartDate { get; set; }
     public DateOnly? EstimatedDueDate { get; set; }
     public decimal? EstimatedHours { get; set; }
     public DateTime CreatedAt { get; set; }
-
-    public List<int> AssignedEmployeeIds { get; set; } = new();
+    public DateTime UpdatedAt { get; set; }
+    public List<AssignedEmployeeDTO> AssignedEmployee {get; set;}  = new ();
 }

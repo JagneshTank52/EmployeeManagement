@@ -1,4 +1,4 @@
-namespace EmployeeManagement.Entities.Models;
+namespace EmployeeManagement.Entities.Models.QueryParamaterModel;
 
 public class PaginationQueryParamater
 {
@@ -9,6 +9,6 @@ public class PaginationQueryParamater
         get => _pageSize;
         set => _pageSize = value > 50 ? 50 : value;
     }
-    public string? SortBy { get; set; } 
+    public string? SortBy { get; set; }
     public string? SearchTerm { get; set; }
 }

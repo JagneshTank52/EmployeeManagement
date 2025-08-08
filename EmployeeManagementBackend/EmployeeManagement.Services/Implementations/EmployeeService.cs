@@ -3,6 +3,7 @@ using System.Runtime.Intrinsics.Arm;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Models.QueryParamaterModel;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.DTO;
 using EmployeeManagement.Services.Helpers;

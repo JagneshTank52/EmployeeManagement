@@ -1,4 +1,5 @@
 using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Models.QueryParamaterModel;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.DTO;
 

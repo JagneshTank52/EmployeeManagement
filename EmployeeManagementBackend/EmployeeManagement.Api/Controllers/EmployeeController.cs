@@ -1,5 +1,6 @@
 
 using EmployeeManagement.Entities.Models;
+using EmployeeManagement.Entities.Models.QueryParamaterModel;
 using EmployeeManagement.Entities.Shared.Constant;
 using EmployeeManagement.Entities.Shared.ExceptionHandling;
 using EmployeeManagement.Repositories.Helper.Authorization;

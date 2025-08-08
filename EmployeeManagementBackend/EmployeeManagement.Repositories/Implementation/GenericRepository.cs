@@ -75,7 +75,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             query = include(query);
         }
 
-        int totalRecord = query.Count();
+        int totalRecord = await query.CountAsync();
 
         // Manage pagination
         if (totalRecord != 0 && totalRecord % pageSize == 0 && pageIndex > totalRecord / pageSize)
@@ -83,6 +83,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
             pageIndex--;
         }
 
+        // int totalPages = (int)Math.Ceiling(totalRecord / (double)pageSize);
+        // if (pageIndex > totalPages)
+        //     pageIndex = totalPages > 0 ? totalPages : 1;
+            
         IEnumerable<T> records = await orderBy(query).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
 
         return (records, totalRecord, pageIndex, pageSize);
@@ -109,6 +113,18 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
         await _dbSet.AddAsync(entity);
         await _context.SaveChangesAsync();
+    }
+
+    // Add Async
+    public virtual async Task<T> AddEntityAsync(T entity)
+    {
+        if (entity == null)
+            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
+
+        await _dbSet.AddAsync(entity);
+        await _context.SaveChangesAsync();
+
+        return entity;
     }
 
     public virtual async Task AddRangeAsync(IEnumerable<T> entities)
