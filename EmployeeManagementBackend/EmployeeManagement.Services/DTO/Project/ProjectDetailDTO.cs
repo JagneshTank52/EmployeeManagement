@@ -9,8 +9,8 @@ public class ProjectDetailDTO
     public int? TechnologyId { get; set; }
     public string TechnologyName { get; set; } = string.Empty;
     public string? ProjectStatus { get; set; }
-    public DateOnly StartDate { get; set; }
-    public DateOnly? EstimatedDueDate { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime? EstimatedDueDate { get; set; }
     public decimal? EstimatedHours { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }

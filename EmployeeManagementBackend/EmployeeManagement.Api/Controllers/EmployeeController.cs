@@ -5,6 +5,7 @@ using EmployeeManagement.Entities.Shared.Constant;
 using EmployeeManagement.Entities.Shared.ExceptionHandling;
 using EmployeeManagement.Repositories.Helper.Authorization;
 using EmployeeManagement.Services.DTO;
+using EmployeeManagement.Services.DTO.Employee;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ public class EmployeeController : ControllerBase
     /// <returns>An ActionResult containing a list of EmployeeDetailDTO objects.
     /// </returns>
     [HttpGet]
-    [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Read)]
+    // [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Read)]
     public async Task<IActionResult> GetEmployeeList([FromQuery] PaginationQueryParamater paramater)
     {
         PaginatedList<EmployeeDetailDTO> employees = await _employeeService.GetEmployees(paramater);
@@ -38,6 +39,19 @@ public class EmployeeController : ControllerBase
                     message: Messages.Success.General.GetSuccess("Employess")
                 )
             );
+    }
+
+    [HttpGet("select-list")]
+    public async Task<IActionResult> GetEmployeeSelectList()
+    {
+        var employees = await _employeeService.GetEmployeeSelectListAsync();
+
+        return Ok(
+            SuccessResponse<List<EmployeeSelectDTO>>.Create(
+                data: employees,
+                message: Messages.Success.General.GetSuccess("Employees for dropdown")
+            )
+        );
     }
 
     /// <summary>
@@ -71,7 +85,7 @@ public class EmployeeController : ControllerBase
     /// <param name="newEmployee">The data for the new employee, sent in the request body.</param>
     /// <returns>An ActionResult indicating the result of the creation operation.</returns>
     [HttpPost]
-    [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Write)]
+    // [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Write)]
     public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeDTO newEmployee)
     {
 
@@ -95,7 +109,7 @@ public class EmployeeController : ControllerBase
     /// <param name="updatedEmployee">The updated employee data, sent in the request body.</param>
     /// <returns>An ActionResult indicating the result of the update operation.</returns>
     [HttpPut("{id}")]
-    [HasPermission(Enums.Permission.Employee,Enums.PermissionType.Write)]
+    // [HasPermission(Enums.Permission.Employee,Enums.PermissionType.Write)]
     public async Task<IActionResult> UpdateEmployee(int id, [FromBody] AddEmployeeDTO updatedEmployee)
     {
         if (id != updatedEmployee.Id)
@@ -122,7 +136,7 @@ public class EmployeeController : ControllerBase
     /// <param name="id">The ID of the employee to delete.</param>
     /// <returns>An ActionResult indicating the result of the deletion operation.</returns>
     [HttpDelete("{id}")]
-    [HasPermission(Enums.Permission.Employee,Enums.PermissionType.Delete)]
+    // [HasPermission(Enums.Permission.Employee,Enums.PermissionType.Delete)]
     public async Task<IActionResult> DeleteEmployee(int id)
     {
         EmployeeDetailDTO? employee = await _employeeService.GetEmployeeById(id);

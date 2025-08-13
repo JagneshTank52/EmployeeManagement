@@ -26,6 +26,10 @@ public partial class EmpManagementContext : DbContext
 
     public virtual DbSet<ProjectEmployee> ProjectEmployees { get; set; }
 
+    public virtual DbSet<ProjectTask> ProjectTasks { get; set; }
+
+    public virtual DbSet<ProjectTaskStatus> ProjectTaskStatuses { get; set; }
+
     public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -145,7 +149,9 @@ public partial class EmpManagementContext : DbContext
             entity.Property(e => e.ProjectStatus)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.StartDate).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.StartDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
             entity.Property(e => e.Type)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -195,6 +201,81 @@ public partial class EmpManagementContext : DbContext
                 .HasForeignKey(d => d.ProjectId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ProjectEmployee_Project");
+        });
+
+        modelBuilder.Entity<ProjectTask>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ProjectT__3214EC073F53E9DD");
+
+            entity.Property(e => e.Code)
+                .HasMaxLength(12)
+                .IsUnicode(false)
+                .HasComputedColumnSql("(('TA'+CONVERT([varchar](5),[ProjectId]))+right('00000'+CONVERT([varchar](5),[Id]),(5)))", true);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+            entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.Label)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Priority)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasDefaultValue("Low");
+            entity.Property(e => e.StartDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Title)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.TotalHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+
+            entity.HasOne(d => d.AssignedToNavigation).WithMany(p => p.ProjectTaskAssignedToNavigations)
+                .HasForeignKey(d => d.AssignedTo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Tasks_AssignedTo");
+
+            entity.HasOne(d => d.ModifiedByNavigation).WithMany(p => p.ProjectTaskModifiedByNavigations)
+                .HasForeignKey(d => d.ModifiedBy)
+                .HasConstraintName("FK_Tasks_ModifiedBy");
+
+            entity.HasOne(d => d.Project).WithMany(p => p.ProjectTasks)
+                .HasForeignKey(d => d.ProjectId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Tasks_Project");
+
+            entity.HasOne(d => d.ReportedByNavigation).WithMany(p => p.ProjectTaskReportedByNavigations)
+                .HasForeignKey(d => d.ReportedBy)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Tasks_ReportedBy");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.ProjectTasks)
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Tasks_Status");
+        });
+
+        modelBuilder.Entity<ProjectTaskStatus>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__ProjectT__3214EC07230A4333");
+
+            entity.ToTable("ProjectTaskStatus");
+
+            entity.Property(e => e.Color)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("#000000");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<RefreshToken>(entity =>

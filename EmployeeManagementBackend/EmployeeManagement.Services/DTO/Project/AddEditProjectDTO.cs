@@ -24,11 +24,11 @@ public class AddEditProjectDTO
     public required string ProjectStatus { get; set; }
 
     [Required(ErrorMessage = "Start date is required.")]
-    public DateOnly StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
     [Required(ErrorMessage = "Estimated due date is required.")]
     [DateGreaterThan(nameof(StartDate), ErrorMessage = "Estimated due date must be after the start date.")]
-    public DateOnly EstimatedDueDate { get; set; }
+    public DateTime EstimatedDueDate { get; set; }
 
     [Required(ErrorMessage = "Estimated hours are required.")]
     [Range(1, 10000, ErrorMessage = "Estimated hours must be between 1 and 10,000.")]

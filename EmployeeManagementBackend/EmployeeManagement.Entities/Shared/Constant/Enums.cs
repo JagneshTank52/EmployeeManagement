@@ -25,6 +25,26 @@ namespace EmployeeManagement.Entities.Shared.Constant
             Conflict = 409
         }
 
+        public enum DropDownType
+        {
+            Technology = 1,
+            TaskStatus = 2,
+            Employee = 3,
+        }
+
+
+        public enum StatusColor
+        {
+            [Description("#00FF00")]
+            New = 1,
+            [Description("#00FF00")]
+            InProgress = 2,
+            [Description("#00FF00")]
+            Completed = 3,
+            [Description("#00FF00")]
+            Blocked = 4
+        }
+
         /// <summary>
         /// Enumeration for UserRoles
         /// </summary>

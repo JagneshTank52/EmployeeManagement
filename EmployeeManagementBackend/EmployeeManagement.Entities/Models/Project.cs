@@ -17,9 +17,9 @@ public partial class Project
 
     public string? ProjectStatus { get; set; }
 
-    public DateOnly StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
-    public DateOnly? EstimatedDueDate { get; set; }
+    public DateTime? EstimatedDueDate { get; set; }
 
     public decimal? EstimatedHours { get; set; }
 
@@ -34,6 +34,8 @@ public partial class Project
     public virtual Employee? ModifiedByNavigation { get; set; }
 
     public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; } = new List<ProjectEmployee>();
+
+    public virtual ICollection<ProjectTask> ProjectTasks { get; set; } = new List<ProjectTask>();
 
     public virtual Technology? Technology { get; set; }
 }

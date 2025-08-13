@@ -1,6 +1,9 @@
+using System.Net;
 using AutoMapper;
 using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Services.DTO;
+using EmployeeManagement.Services.DTO.DropDown;
+using EmployeeManagement.Services.DTO.Employee;
 
 namespace EmployeeManagement.Services.Mapper;
 
@@ -27,6 +30,10 @@ public class EmployeeProfile : Profile, IAutoMapper
         CreateMap<EmployeeDetailDTO, Employee>()
              .ForMember(dest => dest.Department, opt => opt.Ignore())
              .ForMember(dest => dest.Role, opt => opt.Ignore());
+
+        //Employee to EmployeeSelectDTO
+        CreateMap<Employee,DropDownListDTO>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName));
 
     }
 }

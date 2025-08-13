@@ -43,6 +43,12 @@ public partial class Employee
 
     public virtual ICollection<ProjectEmployee> ProjectEmployeeModifiedByNavigations { get; set; } = new List<ProjectEmployee>();
 
+    public virtual ICollection<ProjectTask> ProjectTaskAssignedToNavigations { get; set; } = new List<ProjectTask>();
+
+    public virtual ICollection<ProjectTask> ProjectTaskModifiedByNavigations { get; set; } = new List<ProjectTask>();
+
+    public virtual ICollection<ProjectTask> ProjectTaskReportedByNavigations { get; set; } = new List<ProjectTask>();
+
     public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
 
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();

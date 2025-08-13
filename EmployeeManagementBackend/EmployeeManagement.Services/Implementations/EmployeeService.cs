@@ -6,6 +6,7 @@ using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Entities.Models.QueryParamaterModel;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.DTO;
+using EmployeeManagement.Services.DTO.Employee;
 using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -56,8 +57,15 @@ public class EmployeeService : IEmployeeService
             employees.pageSize,
             employees.totalRecord
         );
-        
+
         return employeeList;
+    }
+
+    public async Task<List<EmployeeSelectDTO>> GetEmployeeSelectListAsync()
+    {
+        var selectEmployeeList = (await _employeeRepository.GetAllAsync(f => !f.IsDeleted)).ToList();
+
+         return _mapper.Map<List<EmployeeSelectDTO>>(selectEmployeeList);
     }
 
     public async Task<EmployeeDetailDTO?> GetEmployeeById(int id)
@@ -102,7 +110,7 @@ public class EmployeeService : IEmployeeService
 
         if (existingEmployee.Email != employeeDto.Email && await _employeeRepository.EmployeeExistsByEmail(employeeDto.Email))
         {
-            return null; 
+            return null;
         }
 
         _mapper.Map(employeeDto, existingEmployee);

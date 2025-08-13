@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 public class DateGreaterThanAttribute : ValidationAttribute
@@ -11,16 +12,21 @@ public class DateGreaterThanAttribute : ValidationAttribute
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        var currentValue = (DateOnly)value;
+        if (value is not DateTime currentValue)
+            return new ValidationResult($"{validationContext.DisplayName} must be a valid date.");
 
         var property = validationContext.ObjectType.GetProperty(_comparisonProperty);
         if (property == null)
             return new ValidationResult($"Unknown property: {_comparisonProperty}");
 
-        var comparisonValue = (DateOnly)property.GetValue(validationContext.ObjectInstance)!;
+        var comparisonValue = property.GetValue(validationContext.ObjectInstance);
+        if (comparisonValue is not DateTime comparisonDate)
+            return new ValidationResult($"{_comparisonProperty} must be a valid date.");
 
-        if (currentValue <= comparisonValue)
-            return new ValidationResult(ErrorMessage ?? $"{validationContext.DisplayName} must be after {_comparisonProperty}.");
+        if (currentValue <= comparisonDate)
+            return new ValidationResult(
+                ErrorMessage ?? $"{validationContext.DisplayName} must be after {_comparisonProperty}."
+            );
 
         return ValidationResult.Success!;
     }

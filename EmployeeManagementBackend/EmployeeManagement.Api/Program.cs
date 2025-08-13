@@ -130,12 +130,16 @@ builder.Services.AddSingleton<IAuthorizationPolicyProvider,PermissionAuthorizati
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IProjectEmployeeRepository, ProjectEmployeeRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IDropDownService, DropDownService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

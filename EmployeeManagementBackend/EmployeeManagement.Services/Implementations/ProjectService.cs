@@ -83,6 +83,12 @@ public class ProjectService : IProjectService
         return _mapper.Map<ProjectDetailDTO>(project);
     }
 
+    public async Task<List<ProjectSelectDTO>> GetProjectSelectListAsync()
+    {
+        var selectProjectList = (await _projectRepository.GetAllAsync(f => !f.IsDeleted)).ToList();
+
+        return _mapper.Map<List<ProjectSelectDTO>>(selectProjectList);
+    }
     public async Task<ProjectDetailDTO?> AddProjectAsync(AddEditProjectDTO newProjectDTO)
     {
         Project newProject = _mapper.Map<Project>(newProjectDTO);
@@ -147,7 +153,8 @@ public class ProjectService : IProjectService
         }
 
         // Map updated fields
-        _mapper.Map(projectDto, existingProject,opt => opt.AfterMap((src,dest) => {
+        _mapper.Map(projectDto, existingProject, opt => opt.AfterMap((src, dest) =>
+        {
             dest.UpdatedAt = DateTime.UtcNow;
         }));
 
