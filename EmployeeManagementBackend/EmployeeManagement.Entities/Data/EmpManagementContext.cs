@@ -38,6 +38,8 @@ public partial class EmpManagementContext : DbContext
 
     public virtual DbSet<Technology> Technologies { get; set; }
 
+    public virtual DbSet<WorkLog> WorkLogs { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:EmpDatabase");
 
@@ -345,6 +347,41 @@ public partial class EmpManagementContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false);
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<WorkLog>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__WorkLog__3214EC0710F1DEE4");
+
+            entity.ToTable("WorkLog");
+
+            entity.Property(e => e.Code)
+                .HasMaxLength(12)
+                .IsUnicode(false)
+                .HasComputedColumnSql("(('WL'+CONVERT([varchar](5),[TaskId]))+right('00000'+CONVERT([varchar](5),[Id]),(5)))", true);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Description)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.IsEditable).HasComputedColumnSql("(case when datediff(day,[WorkDate],getdate())<=(3) then CONVERT([bit],(1)) else CONVERT([bit],(0)) end)", false);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+            entity.Property(e => e.WorkDate).HasColumnType("datetime");
+            entity.Property(e => e.WorkLogTitle)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.WorkTimeHours).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Task).WithMany(p => p.WorkLogs)
+                .HasForeignKey(d => d.TaskId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_WorkLog_Task");
+
+            entity.HasOne(d => d.WorkDoneByNavigation).WithMany(p => p.WorkLogs)
+                .HasForeignKey(d => d.WorkDoneBy)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_WorkDone_By");
         });
 
         OnModelCreatingPartial(modelBuilder);

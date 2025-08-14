@@ -19,9 +19,9 @@ public class DropDownController : ControllerBase
     }
 
     [HttpGet("get-drop-down-list/{type}")]
-    public async Task<IActionResult> GetDropDownList(Enums.DropDownType type)
+    public async Task<IActionResult> GetDropDownList([FromRoute] Enums.DropDownType type,[FromQuery] int? filterId)
     {
-        List<DropDownListDTO> dropDownList = await _dropDownService.GetDropDownListsAsync(type);
+        List<DropDownListDTO> dropDownList = await _dropDownService.GetDropDownListsAsync(type,filterId);
 
         return Ok(
             SuccessResponse<List<DropDownListDTO>>.Create(

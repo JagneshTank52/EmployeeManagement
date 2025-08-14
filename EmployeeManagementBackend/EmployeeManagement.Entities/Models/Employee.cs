@@ -54,4 +54,6 @@ public partial class Employee
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
     public virtual Role? Role { get; set; }
+
+    public virtual ICollection<WorkLog> WorkLogs { get; set; } = new List<WorkLog>();
 }

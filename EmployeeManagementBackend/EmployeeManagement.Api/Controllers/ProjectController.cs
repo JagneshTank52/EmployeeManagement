@@ -38,19 +38,6 @@ public class ProjectController : ControllerBase
         );
     }
 
-    [HttpGet("select-list")]
-    public async Task<IActionResult> GetProjectSelectList()
-    {
-        var projects = await _projectService.GetProjectSelectListAsync();
-        return Ok(
-            SuccessResponse<List<ProjectSelectDTO>>.Create(
-                data: projects,
-                message: Messages.Success.General.GetSuccess("P for dropdown")
-            )
-        );
-    }
-
-
     /// <summary>
     /// Retrieves a specific project by its unique identifier.
     /// </summary>

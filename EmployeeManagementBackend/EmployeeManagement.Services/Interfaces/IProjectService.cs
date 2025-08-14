@@ -7,7 +7,6 @@ namespace EmployeeManagement.Services.Interfaces;
 public interface IProjectService
 {
     Task<PaginatedList<ProjectDetailDTO>> GetProjects(ProjectQueryParamater parameters);
-    Task<List<ProjectSelectDTO>> GetProjectSelectListAsync();
     Task<ProjectDetailDTO> GetProjectById(int id);
     Task<ProjectDetailDTO?> AddProjectAsync(AddEditProjectDTO newProjectDTO);
     Task<ProjectDetailDTO?> EditProject(AddEditProjectDTO projectDto);

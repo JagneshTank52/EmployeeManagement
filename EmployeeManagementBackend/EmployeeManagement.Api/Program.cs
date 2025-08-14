@@ -6,7 +6,6 @@ using EmployeeManagement.Entities.Shared.Convertor;
 using EmployeeManagement.Repositories.Helper.Authorization;
 using EmployeeManagement.Repositories.Implementation;
 using EmployeeManagement.Repositories.Interface;
-using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Implementation;
 using EmployeeManagement.Services.Implementations;
 using EmployeeManagement.Services.Interfaces;
@@ -132,6 +131,7 @@ builder.Services.AddScoped<IProjectEmployeeRepository, ProjectEmployeeRepository
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ITechnologyRepository, TechnologyRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<IWorklogRepository, WorklogRepository>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
@@ -141,6 +141,7 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddScoped<IDropDownService, DropDownService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IWorklogService, WorklogService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 // Clears built-in providers

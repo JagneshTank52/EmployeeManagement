@@ -12,16 +12,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.Services.Implementations;
 
-public class TaskService : ITaskService
+public class TaskService(ITaskRepository taskRepository, IMapper mapper) : ITaskService
 {
-    private readonly ITaskRepository _taskRepository;
-    private readonly IMapper _mapper;
+    private readonly ITaskRepository _taskRepository = taskRepository;
+    private readonly IMapper _mapper = mapper;
 
-    public TaskService(ITaskRepository taskRepository, IMapper mapper)
-    {
-        _taskRepository = taskRepository;
-        _mapper = mapper;
-    }
+
     public async Task<PaginatedList<TaskDetailDTO>> GetTasksAsync(TaskQueryParameter parameters)
     {
         Expression<Func<ProjectTask, bool>> filter = p => !p.IsDeleted;

@@ -48,4 +48,6 @@ public partial class ProjectTask
     public virtual Employee ReportedByNavigation { get; set; } = null!;
 
     public virtual ProjectTaskStatus Status { get; set; } = null!;
+
+    public virtual ICollection<WorkLog> WorkLogs { get; set; } = new List<WorkLog>();
 }

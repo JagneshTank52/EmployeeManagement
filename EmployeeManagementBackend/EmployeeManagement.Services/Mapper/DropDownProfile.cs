@@ -11,5 +11,6 @@ public class DropDownProfile : Profile
         CreateMap<ProjectTaskStatus, DropDownListDTO>();
         CreateMap<Employee, DropDownListDTO>();
         CreateMap<Technology, DropDownListDTO>();
+        CreateMap<Project, DropDownListDTO>();
     }
 }

@@ -5,5 +5,5 @@ namespace EmployeeManagement.Services.Interfaces;
 
 public interface IDropDownService
 {
-    Task<List<DropDownListDTO>> GetDropDownListsAsync(Enums.DropDownType dropDownType);
+    Task<List<DropDownListDTO>> GetDropDownListsAsync(Enums.DropDownType dropDownType,int? filterId);
 }
