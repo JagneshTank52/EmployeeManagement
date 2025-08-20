@@ -41,18 +41,18 @@ public class EmployeeController : ControllerBase
             );
     }
 
-    [HttpGet("select-list")]
-    public async Task<IActionResult> GetEmployeeSelectList()
-    {
-        var employees = await _employeeService.GetEmployeeSelectListAsync();
+    // [HttpGet("select-list")]
+    // public async Task<IActionResult> GetEmployeeSelectList()
+    // {
+    //     var employees = await _employeeService.GetEmployeeSelectListAsync();
 
-        return Ok(
-            SuccessResponse<List<EmployeeSelectDTO>>.Create(
-                data: employees,
-                message: Messages.Success.General.GetSuccess("Employees for dropdown")
-            )
-        );
-    }
+    //     return Ok(
+    //         SuccessResponse<List<EmployeeSelectDTO>>.Create(
+    //             data: employees,
+    //             message: Messages.Success.General.GetSuccess("Employees for dropdown")
+    //         )
+    //     );
+    // }
 
     /// <summary>
     /// Retrieves a single employee by their ID.

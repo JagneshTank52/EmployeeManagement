@@ -17,7 +17,7 @@ public class TaskController : ControllerBase
 
     [HttpGet]
     // [HasPermission(Enums.Permission.Employee, Enums.PermissionType.Read)]
-    public async Task<IActionResult> GetProjectList([FromQuery] TaskQueryParameter parameters)
+    public async Task<IActionResult> GetTaskList([FromQuery] TaskQueryParameter parameters)
     {
         var tasks = await _taskService.GetTasksAsync(parameters);
 

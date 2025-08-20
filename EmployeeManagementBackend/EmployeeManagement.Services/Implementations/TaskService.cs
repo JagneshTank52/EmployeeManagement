@@ -27,7 +27,8 @@ public class TaskService(ITaskRepository taskRepository, IMapper mapper) : ITask
             var term = parameters.SearchTerm.ToLower();
             filter = filter.AndAlso(p =>
                 p.Title.ToLower().Contains(term) ||
-                p.Code!.ToLower().Contains(term)
+                p.Code!.ToLower().Contains(term) ||
+                p.Project.Name.ToLower().Contains(term)
             );
         }
 

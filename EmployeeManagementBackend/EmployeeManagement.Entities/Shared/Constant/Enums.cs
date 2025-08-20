@@ -31,7 +31,7 @@ namespace EmployeeManagement.Entities.Shared.Constant
             TaskStatus = 2,
             Employee = 3,
             Project = 4
-        }
+        }   
 
 
         public enum StatusColor

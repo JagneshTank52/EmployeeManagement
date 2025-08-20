@@ -6,6 +6,7 @@ using EmployeeManagement.Entities.Models;
 using EmployeeManagement.Entities.Models.QueryParamaterModel;
 using EmployeeManagement.Repositories.Interface;
 using EmployeeManagement.Services.DTO;
+using EmployeeManagement.Services.DTO.DropDown;
 using EmployeeManagement.Services.DTO.Employee;
 using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Interfaces;
@@ -61,11 +62,11 @@ public class EmployeeService : IEmployeeService
         return employeeList;
     }
 
-    public async Task<List<EmployeeSelectDTO>> GetEmployeeSelectListAsync()
+    public async Task<List<DropDownListDTO>> GetEmployeeSelectListAsync()
     {
         var selectEmployeeList = (await _employeeRepository.GetAllAsync(f => !f.IsDeleted)).ToList();
 
-         return _mapper.Map<List<EmployeeSelectDTO>>(selectEmployeeList);
+         return _mapper.Map<List<DropDownListDTO>>(selectEmployeeList);
     }
 
     public async Task<EmployeeDetailDTO?> GetEmployeeById(int id)

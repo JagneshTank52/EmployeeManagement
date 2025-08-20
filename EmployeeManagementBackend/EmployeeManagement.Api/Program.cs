@@ -27,6 +27,8 @@ builder.Services.AddDbContext<EmpManagementContext>(options =>
 builder.Services.AddControllers()
  .AddJsonOptions(options =>
                 {
+                    // this will match request case sensitively
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
                 });
 
@@ -52,7 +54,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"])),
         ClockSkew = TimeSpan.Zero
     };
-    
+
     // options.Events = new JwtBearerEvents
     // {
     //     OnMessageReceived = context =>
@@ -123,8 +125,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(IAutoMapper).Assembly);
-builder.Services.AddSingleton<IAuthorizationHandler,PermissionAuthorizationHandler>();
-builder.Services.AddSingleton<IAuthorizationPolicyProvider,PermissionAuthorizationPolicyProvider>();
+builder.Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IProjectEmployeeRepository, ProjectEmployeeRepository>();
