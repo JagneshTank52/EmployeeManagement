@@ -12,4 +12,6 @@ public class WorkSheetDetailsDTO
 
     public List<WorkSheetTaskDetailsDTO> Tasks {get; set;}
 
+    public List<DailyWorklogDetailsDTO> DailyWorkLogs {get; set;}
+
 }

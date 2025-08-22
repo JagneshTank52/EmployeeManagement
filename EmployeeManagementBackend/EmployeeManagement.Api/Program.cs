@@ -24,13 +24,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EmpManagementContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EmpDatabase")));
 
-builder.Services.AddControllers()
- .AddJsonOptions(options =>
-                {
-                    // this will match request case sensitively
-                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                });
+builder.Services.AddControllers();
+//  .AddJsonOptions(options =>
+//                 {
+//                     // this will match request case sensitively
+//                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+//                     options.JsonSerializerOptions.PropertyNamingPolicy = null;
+//                 });
 
 var configuration = builder.Configuration;
 

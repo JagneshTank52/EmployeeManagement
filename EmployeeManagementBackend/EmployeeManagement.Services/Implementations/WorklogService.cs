@@ -110,17 +110,56 @@ public class WorklogService(IWorklogRepository worklogRepository, IProjectReposi
             result.totalRecord
         );
     }
-    
-    public async Task<WorkSheetDetailsDTO> GetWorkSheetAsync(int month, int year)
+
+    public async Task<WorkSheetDetailsDTO> GetWorkSheetAsync(int month, int year, int projectId)
     {
-        Project? projects = await _projectRepository.GetFirstOrDefaultAsync(
-            filter: f => !f.IsDeleted && f.Id == 1007,
+        Project? project = await _projectRepository.GetFirstOrDefaultAsync(
+            filter: f => !f.IsDeleted && f.Id == projectId,
             include: i => i.Include(a => a.ProjectTasks).ThenInclude(a1 => a1.Status)
                             .Include(b => b.ProjectTasks).ThenInclude(b1 => b1.WorkLogs)
         );
 
+        if (project == null)
+            throw new DataNotFoundException($"Project with Id {projectId} not found.");
 
-        WorkSheetDetailsDTO result = _mapper.Map<WorkSheetDetailsDTO>(projects);
+        var monthStart = new DateOnly(year, month, 1);
+        var monthEnd = monthStart.AddMonths(1).AddDays(-1);
+
+        // Flatten worklogs
+        var worklogs = project.ProjectTasks
+            .SelectMany(t => t.WorkLogs)
+            .Where(w => DateOnly.FromDateTime(w.CreatedAt) >= monthStart && DateOnly.FromDateTime(w.CreatedAt) <= monthEnd && !w.IsDeleted)
+            .ToList();
+
+        // Build all days in month
+        var dailyLogs = Enumerable.Range(0, monthEnd.Day)
+            .Select(offset =>
+            {
+                var date = monthStart.AddDays(offset);
+
+                var dailyMinutes = (int) worklogs
+                    .Where(w => DateOnly.FromDateTime(w.CreatedAt) == date)
+                    .Sum(w => w.WorkTimeHours);
+
+                var weekStart = date.AddDays(-(int)date.DayOfWeek);
+                var weekEnd = weekStart.AddDays(6);
+
+                var weeklyMinutes = (int) worklogs
+                    .Where(w => DateOnly.FromDateTime(w.CreatedAt) >= weekStart && DateOnly.FromDateTime(w.CreatedAt) <= weekEnd)
+                    .Sum(w => w.WorkTimeHours);
+
+                return new DailyWorklogDetailsDTO
+                {
+                    AttendanceDate = date,
+                    Day = date.DayOfWeek.ToString(),
+                    DailyWorkLoginMinutes = dailyMinutes,
+                    WeeklyTotalTimeInMinutes = weeklyMinutes
+                };
+            })
+            .ToList();
+
+        var result = _mapper.Map<WorkSheetDetailsDTO>(project);
+        result.DailyWorkLogs = dailyLogs;
 
         return result;
     }

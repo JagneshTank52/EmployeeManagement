@@ -28,14 +28,14 @@ public class WorklogController : ControllerBase
     }
 
     [HttpGet("work-sheet")]
-    public async Task<IActionResult> GetWorkSheet([FromQuery] int month, [FromQuery] int year)
+    public async Task<IActionResult> GetWorkSheet([FromQuery] int month, [FromQuery] int year, [FromQuery] int ProjectId)
     {
-        WorkSheetDetailsDTO workSheet = await _worklogService.GetWorkSheetAsync(month, year);
+        WorkSheetDetailsDTO workSheet = await _worklogService.GetWorkSheetAsync(month, year, ProjectId);
 
         return Ok(SuccessResponse<WorkSheetDetailsDTO>.Create(
-    data: workSheet,
-    message: Messages.Success.General.GetSuccess("Work logs")
-));
+            data: workSheet,
+            message: Messages.Success.General.GetSuccess("Work logs")
+        ));
     }
 
     [HttpGet("{id}")]

@@ -13,7 +13,6 @@ public class WorklogDetailsDTO
     public string TaskStatusName { get; set; } = null!; //
     public string? TaskStatusColor { get; set; } //
     public decimal WorkTimeHours { get; set; }
-
     public bool IsEditable { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

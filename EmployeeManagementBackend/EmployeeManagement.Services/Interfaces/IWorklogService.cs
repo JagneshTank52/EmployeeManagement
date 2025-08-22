@@ -7,7 +7,7 @@ namespace EmployeeManagement.Services.Interfaces;
 public interface IWorklogService
 {
     Task<PaginatedList<WorklogDetailsDTO>> GetWorkLogsAsync(WorklogQueryParamater parameters);
-    Task<WorkSheetDetailsDTO> GetWorkSheetAsync(int month, int year);
+    Task<WorkSheetDetailsDTO> GetWorkSheetAsync(int month, int year, int projectId);
     Task<WorklogDetailsDTO> GetWorkLogByIdAsync(int id);
     Task<WorklogDetailsDTO> AddWorkLogAsync(AddEditWorklogDTO dto);
     Task<WorklogDetailsDTO> EditWorkLogAsync(AddEditWorklogDTO dto);
