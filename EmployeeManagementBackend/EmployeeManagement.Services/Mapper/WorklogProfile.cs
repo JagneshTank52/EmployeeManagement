@@ -16,6 +16,7 @@ public class WorklogProfile : Profile
 
         CreateMap<WorkLog, WorklogDetailsDTO>()
             .ForMember(d => d.TaskCode, o => o.MapFrom(s => s.Task.Code))
+            .ForMember(d => d.Description, o => o.MapFrom(s => s.Description))
             .ForMember(d => d.TaskTitle, o => o.MapFrom(s => s.Task.Title))
             .ForMember(d => d.AssignedToName, o => o.MapFrom(s => s.Task.AssignedToNavigation.FirstName + " " + s.Task.AssignedToNavigation.LastName))
             .ForMember(d => d.TaskStatusName, o => o.MapFrom(s => s.Task.Status.Name))
@@ -31,7 +32,7 @@ public class WorklogProfile : Profile
                     src.ProjectTasks
                         .SelectMany(t => t.WorkLogs)
                         .Where(wl => !wl.IsDeleted)
-                        .Sum(wl => wl.WorkTimeHours * 60)
+                        .Sum(wl => wl.WorkTimeInMinutes)
                 ))
             .ForMember(dest => dest.Tasks, opt => opt.MapFrom(src => src.ProjectTasks));
 
@@ -42,7 +43,7 @@ public class WorklogProfile : Profile
           .ForMember(dest => dest.TotalTimeSpent,
               opt => opt.MapFrom(src =>
                   src.WorkLogs.Where(wl => !wl.IsDeleted)
-                              .Sum(wl => wl.WorkTimeHours * 60)
+                              .Sum(wl => wl.WorkTimeInMinutes)
               ))
           .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate))
           .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate ?? DateTime.MinValue))
@@ -56,8 +57,8 @@ public class WorklogProfile : Profile
             .ForMember(dest => dest.AttendanceDate, opt => opt.MapFrom(src => src.WorkDate))
             .ForMember(dest => dest.Day, opt => opt.MapFrom(src => src.WorkDate.DayOfWeek.ToString()))
             .ForMember(dest => dest.IsEnable, opt => opt.MapFrom(src => true))
-            .ForMember(dest => dest.IsHoliday, opt => opt.MapFrom(src => src.WorkDate.DayOfWeek == DayOfWeek.Sunday))
-            .ForMember(dest => dest.WorkTimeInMinute, opt => opt.MapFrom(src => (int)(src.WorkTimeHours * 60)));
+            .ForMember(dest => dest.IsHoliday, opt => opt.MapFrom(src => src.WorkDate.DayOfWeek == DayOfWeek.Sunday));
+            // .ForMember(dest => dest.WorkTimeInMinute, opt => opt.MapFrom(src => (int)(src.WorkTimeHours * 60)));
 
 
     }

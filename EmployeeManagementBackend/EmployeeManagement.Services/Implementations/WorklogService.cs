@@ -139,14 +139,14 @@ public class WorklogService(IWorklogRepository worklogRepository, IProjectReposi
 
                 var dailyMinutes = (int) worklogs
                     .Where(w => DateOnly.FromDateTime(w.CreatedAt) == date)
-                    .Sum(w => w.WorkTimeHours);
+                    .Sum(w => w.WorkTimeInMinutes);
 
                 var weekStart = date.AddDays(-(int)date.DayOfWeek);
                 var weekEnd = weekStart.AddDays(6);
 
                 var weeklyMinutes = (int) worklogs
                     .Where(w => DateOnly.FromDateTime(w.CreatedAt) >= weekStart && DateOnly.FromDateTime(w.CreatedAt) <= weekEnd)
-                    .Sum(w => w.WorkTimeHours);
+                    .Sum(w => w.WorkTimeInMinutes);
 
                 return new DailyWorklogDetailsDTO
                 {

@@ -351,7 +351,7 @@ public partial class EmpManagementContext : DbContext
 
         modelBuilder.Entity<WorkLog>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__WorkLog__3214EC0710F1DEE4");
+            entity.HasKey(e => e.Id).HasName("PK__WorkLog__3214EC07C9B42F79");
 
             entity.ToTable("WorkLog");
 
@@ -371,7 +371,7 @@ public partial class EmpManagementContext : DbContext
             entity.Property(e => e.WorkLogTitle)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.WorkTimeHours).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.WorkTimeInMinutes).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Task).WithMany(p => p.WorkLogs)
                 .HasForeignKey(d => d.TaskId)

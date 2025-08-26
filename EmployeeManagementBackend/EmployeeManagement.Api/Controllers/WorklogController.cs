@@ -32,10 +32,10 @@ public class WorklogController : ControllerBase
     {
         WorkSheetDetailsDTO workSheet = await _worklogService.GetWorkSheetAsync(month, year, ProjectId);
 
-        return Ok(SuccessResponse<WorkSheetDetailsDTO>.Create(
-            data: workSheet,
-            message: Messages.Success.General.GetSuccess("Work logs")
-        ));
+            return Ok(SuccessResponse<WorkSheetDetailsDTO>.Create(
+                data: workSheet,
+                message: Messages.Success.General.GetSuccess("Work logs")
+            ));
     }
 
     [HttpGet("{id}")]

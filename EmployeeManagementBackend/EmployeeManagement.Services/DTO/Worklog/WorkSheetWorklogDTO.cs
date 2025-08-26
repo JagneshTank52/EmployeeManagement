@@ -12,7 +12,7 @@ public class WorkSheetWorklogDTO
 
     public bool IsHoliday {get; set;}
 
-    public int WorkTimeInMinute {get; set;}
+    public int WorkTimeInMinutes {get; set;}
 
 
 }

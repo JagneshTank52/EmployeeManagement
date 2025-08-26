@@ -15,19 +15,19 @@ public partial class WorkLog
 
     public DateTime WorkDate { get; set; }
 
-    public decimal WorkTimeHours { get; set; }
+    public decimal WorkTimeInMinutes { get; set; }
 
-    public bool? IsEditable { get; set; } //
+    public bool? IsEditable { get; set; }
 
     public string? Description { get; set; }
 
-    public int WorkDoneBy { get; set; } //
+    public int WorkDoneBy { get; set; }
 
-    public DateTime CreatedAt { get; set; } //
+    public DateTime CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
 
-    public bool IsDeleted { get; set; } //
+    public bool IsDeleted { get; set; }
 
     public virtual ProjectTask Task { get; set; } = null!;
 
