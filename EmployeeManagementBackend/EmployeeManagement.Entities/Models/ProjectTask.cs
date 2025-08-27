@@ -49,5 +49,7 @@ public partial class ProjectTask
 
     public virtual ProjectTaskStatus Status { get; set; } = null!;
 
+    public virtual ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
+
     public virtual ICollection<WorkLog> WorkLogs { get; set; } = new List<WorkLog>();
 }

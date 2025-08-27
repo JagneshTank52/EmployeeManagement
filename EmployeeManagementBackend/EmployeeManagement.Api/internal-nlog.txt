@@ -2391,3 +2391,425 @@
 2025-08-26 18:01:05.8777 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
 2025-08-26 18:01:05.8824 Info AutoReload Config File Monitor starting
 2025-08-26 18:01:05.9009 Info Configuration initialized.
+2025-08-27 09:33:12.0706 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 09:33:12.1069 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 09:33:12.1069 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 09:33:12.1069 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 09:33:12.1069 Info AutoReload Config File Monitor starting
+2025-08-27 09:33:12.1305 Info Configuration initialized.
+2025-08-27 10:51:41.1455 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 10:51:41.1513 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 10:51:41.1513 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 10:51:41.1513 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 10:51:41.1513 Info AutoReload Config File Monitor starting
+2025-08-27 10:51:41.1758 Info Configuration initialized.
+2025-08-27 11:21:28.3317 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 11:21:28.3390 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 11:21:28.3390 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 11:21:28.3390 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 11:21:28.3475 Info AutoReload Config File Monitor starting
+2025-08-27 11:21:28.3475 Info Configuration initialized.
+2025-08-27 12:03:04.8739 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:03:04.9024 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:03:04.9024 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:03:04.9024 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:03:04.9024 Info AutoReload Config File Monitor starting
+2025-08-27 12:03:04.9295 Info Configuration initialized.
+2025-08-27 12:10:09.9497 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:10:09.9743 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:10:09.9743 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:10:09.9886 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:10:09.9886 Info AutoReload Config File Monitor starting
+2025-08-27 12:10:10.0091 Info Configuration initialized.
+2025-08-27 12:12:06.3891 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:12:06.4191 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:12:06.4191 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:12:06.4265 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:12:06.4265 Info AutoReload Config File Monitor starting
+2025-08-27 12:12:06.4492 Info Configuration initialized.
+2025-08-27 12:14:18.3466 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:14:18.3541 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:14:18.3541 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:14:18.3541 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:14:18.3541 Info AutoReload Config File Monitor starting
+2025-08-27 12:14:18.3793 Info Configuration initialized.
+2025-08-27 12:15:12.4746 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:15:12.4746 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:15:12.4833 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:15:12.4833 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:15:12.4833 Info AutoReload Config File Monitor starting
+2025-08-27 12:15:12.5086 Info Configuration initialized.
+2025-08-27 12:31:24.2177 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:31:24.2284 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:31:24.2284 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:31:24.2284 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:31:24.2400 Info AutoReload Config File Monitor starting
+2025-08-27 12:31:24.2619 Info Configuration initialized.
+2025-08-27 12:33:28.4599 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:33:28.4677 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:33:28.4677 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:33:28.4677 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:33:28.4677 Info AutoReload Config File Monitor starting
+2025-08-27 12:33:28.4932 Info Configuration initialized.
+2025-08-27 12:43:57.0079 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:43:57.0079 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:43:57.0079 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:43:57.0079 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:43:57.0237 Info AutoReload Config File Monitor starting
+2025-08-27 12:43:57.0397 Info Configuration initialized.
+2025-08-27 12:44:56.4660 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:44:56.4660 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:44:56.4660 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:44:56.4660 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:44:56.4818 Info AutoReload Config File Monitor starting
+2025-08-27 12:44:56.4979 Info Configuration initialized.
+2025-08-27 12:46:18.9571 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:46:18.9571 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:46:18.9571 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:46:18.9697 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:46:18.9697 Info AutoReload Config File Monitor starting
+2025-08-27 12:46:18.9887 Info Configuration initialized.
+2025-08-27 12:46:40.0170 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:46:40.0240 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:46:40.0240 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:46:40.0240 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:46:40.0240 Info AutoReload Config File Monitor starting
+2025-08-27 12:46:40.0484 Info Configuration initialized.
+2025-08-27 12:48:51.9205 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:48:51.9275 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:48:51.9275 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:48:51.9275 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:48:51.9275 Info AutoReload Config File Monitor starting
+2025-08-27 12:48:51.9519 Info Configuration initialized.
+2025-08-27 12:52:25.2257 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 12:52:25.2331 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 12:52:25.2331 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 12:52:25.2331 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 12:52:25.2331 Info AutoReload Config File Monitor starting
+2025-08-27 12:52:25.2576 Info Configuration initialized.
+2025-08-27 14:38:01.2238 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 14:38:01.2514 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 14:38:01.2514 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 14:38:01.2514 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 14:38:01.2604 Info AutoReload Config File Monitor starting
+2025-08-27 14:38:01.2779 Info Configuration initialized.
+2025-08-27 14:40:41.3671 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 14:40:41.3949 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 14:40:41.3949 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 14:40:41.3949 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 14:40:41.3949 Info AutoReload Config File Monitor starting
+2025-08-27 14:40:41.4225 Info Configuration initialized.
+2025-08-27 16:26:41.2989 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:26:41.3067 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:26:41.3323 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:26:41.3323 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:26:41.3323 Info AutoReload Config File Monitor starting
+2025-08-27 16:26:41.3597 Info Configuration initialized.
+2025-08-27 16:29:21.3963 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:29:21.4248 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:29:21.4248 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:29:21.4248 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:29:21.4248 Info AutoReload Config File Monitor starting
+2025-08-27 16:29:21.4558 Info Configuration initialized.
+2025-08-27 16:29:21.6040 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7146 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7537 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7537 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7745 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7830 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7830 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7992 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.7992 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8236 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8236 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8325 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8467 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8467 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8467 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8607 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:21.8607 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:22.0356 Error FileTarget(Name=logfile): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-all-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-all-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:22.0356 Error FileTarget(Name=ownFile-web): Failed writing to FileName: 'E:/Angular/Logs/EmployeeManagementLogs/logfile-own-2025-08-27.log' Exception: System.IO.IOException: The process cannot access the file 'E:\Angular\Logs\EmployeeManagementLogs\logfile-own-2025-08-27.log' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at NLog.Targets.FileTarget.CreateFileStream(String filePath, Int32 bufferSize)
+   at NLog.Targets.FileTarget.OpenNewFileStream(String filePath, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileTarget.CreateFileStreamWithRetry(IFileAppender fileAppender, Int32 bufferSize, Boolean initialFileOpen)
+   at NLog.Targets.FileAppenders.ExclusiveFileLockingAppender..ctor(FileTarget fileTarget, String filePath)
+   at NLog.Targets.FileTarget.CreateFileAppender(String filePath)
+   at NLog.Targets.FileTarget.OpenFile(String filename, LogEventInfo firstLogEvent, Nullable`1 previousFileLastModified, Int32 sequenceNumber)
+   at NLog.Targets.FileTarget.WriteBytesToFile(String filename, LogEventInfo firstLogEvent, MemoryStream ms)
+   at NLog.Targets.FileTarget.Write(LogEventInfo logEvent)
+2025-08-27 16:29:48.4028 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:29:48.4215 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:29:48.4297 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:29:48.4481 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:29:48.4481 Info AutoReload Config File Monitor starting
+2025-08-27 16:29:48.4722 Info Configuration initialized.
+2025-08-27 16:31:47.1751 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:31:47.2053 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:31:47.2053 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:31:47.2053 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:31:47.2053 Info AutoReload Config File Monitor starting
+2025-08-27 16:31:47.2328 Info Configuration initialized.
+2025-08-27 16:34:56.8483 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:34:56.8799 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:34:56.8799 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:34:56.8799 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:34:56.8799 Info AutoReload Config File Monitor starting
+2025-08-27 16:34:56.9087 Info Configuration initialized.
+2025-08-27 16:36:10.5850 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:36:10.6147 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:36:10.6157 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:36:10.6157 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:36:10.6157 Info AutoReload Config File Monitor starting
+2025-08-27 16:36:10.6434 Info Configuration initialized.
+2025-08-27 16:37:37.2130 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:37:37.2435 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:37:37.2527 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:37:37.2527 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:37:37.2527 Info AutoReload Config File Monitor starting
+2025-08-27 16:37:37.2783 Info Configuration initialized.
+2025-08-27 16:39:14.4189 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2025-08-27 16:39:14.4381 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2025-08-27 16:39:14.4381 Info Registered target NLog.Targets.ConsoleTarget(Name=logconsole)
+2025-08-27 16:39:14.4458 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.1.4190. Product version: 6.0.1+45ae3f006d8a374de96397578a2c85ba31b9aad7. GlobalAssemblyCache: False
+2025-08-27 16:39:14.4458 Info AutoReload Config File Monitor starting
+2025-08-27 16:39:14.4836 Info Configuration initialized.

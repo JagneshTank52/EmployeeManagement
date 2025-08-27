@@ -37,6 +37,10 @@ public partial class Employee
 
     public bool IsDeleted { get; set; }
 
+    public virtual ICollection<Attendance> AttendanceModifyByNavigations { get; set; } = new List<Attendance>();
+
+    public virtual ICollection<Attendance> AttendanceUsers { get; set; } = new List<Attendance>();
+
     public virtual Department? Department { get; set; }
 
     public virtual ICollection<ProjectEmployee> ProjectEmployeeEmployees { get; set; } = new List<ProjectEmployee>();
@@ -54,6 +58,8 @@ public partial class Employee
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
     public virtual Role? Role { get; set; }
+
+    public virtual ICollection<TaskComment> TaskComments { get; set; } = new List<TaskComment>();
 
     public virtual ICollection<WorkLog> WorkLogs { get; set; } = new List<WorkLog>();
 }

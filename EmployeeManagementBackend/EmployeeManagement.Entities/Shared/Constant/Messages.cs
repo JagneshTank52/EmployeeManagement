@@ -15,6 +15,7 @@ namespace EmployeeManagement.Entities.Shared.Constant
                 public const string Success = "Success";
                 public static readonly Func<string, string> AuthSuccess = (entityName) => $"{entityName} successfully.";
                 public static readonly Func<string, string> GetSuccess = (entityName) => $"{entityName} fetched successfully.";
+                public static readonly Func<string, string> PostSuccess = (entityName) => $"{entityName} added successfully.";
             }
         }
 

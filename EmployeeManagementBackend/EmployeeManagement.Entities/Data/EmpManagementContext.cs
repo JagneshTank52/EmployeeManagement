@@ -16,6 +16,8 @@ public partial class EmpManagementContext : DbContext
     {
     }
 
+    public virtual DbSet<Attendance> Attendances { get; set; }
+
     public virtual DbSet<Department> Departments { get; set; }
 
     public virtual DbSet<Employee> Employees { get; set; }
@@ -36,6 +38,8 @@ public partial class EmpManagementContext : DbContext
 
     public virtual DbSet<RolePermission> RolePermissions { get; set; }
 
+    public virtual DbSet<TaskComment> TaskComments { get; set; }
+
     public virtual DbSet<Technology> Technologies { get; set; }
 
     public virtual DbSet<WorkLog> WorkLogs { get; set; }
@@ -45,6 +49,37 @@ public partial class EmpManagementContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Attendance>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Attendan__3214EC07078C8D15");
+
+            entity.ToTable("Attendance");
+
+            entity.Property(e => e.AttendanceDate).HasColumnType("datetime");
+            entity.Property(e => e.AttendanceType)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsEditable).HasDefaultValue(true);
+            entity.Property(e => e.IsSubmitted).HasDefaultValue(false);
+            entity.Property(e => e.IsWeekOff).HasDefaultValue(false);
+            entity.Property(e => e.NameOfDay)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+
+            entity.HasOne(d => d.ModifyByNavigation).WithMany(p => p.AttendanceModifyByNavigations)
+                .HasForeignKey(d => d.ModifyBy)
+                .HasConstraintName("FK_MODIFY_BY_ID");
+
+            entity.HasOne(d => d.User).WithMany(p => p.AttendanceUsers)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_USER_ID");
+        });
+
         modelBuilder.Entity<Department>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Departme__3214EC079E7C983A");
@@ -334,6 +369,29 @@ public partial class EmpManagementContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RolePermissions_Role");
+        });
+
+        modelBuilder.Entity<TaskComment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__TaskComm__3214EC0707F6D8CD");
+
+            entity.ToTable("TaskComment");
+
+            entity.Property(e => e.Comment).HasColumnType("text");
+            entity.Property(e => e.CommentBy).HasColumnName("CommentBY");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
+
+            entity.HasOne(d => d.CommentByNavigation).WithMany(p => p.TaskComments)
+                .HasForeignKey(d => d.CommentBy)
+                .HasConstraintName("FK_Comment_User");
+
+            entity.HasOne(d => d.Task).WithMany(p => p.TaskComments)
+                .HasForeignKey(d => d.TaskId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Comment_Task");
         });
 
         modelBuilder.Entity<Technology>(entity =>
