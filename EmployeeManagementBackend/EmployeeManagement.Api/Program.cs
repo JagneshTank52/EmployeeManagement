@@ -139,6 +139,7 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -148,6 +149,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IWorklogService, WorklogService>();
+// builder.Services.AddScoped<IRecaptchaV2Service, RecaptchaV2Service>();
+builder.Services.AddHttpClient<IRecaptchaV2Service, RecaptchaV2Service>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 // Clears built-in providers

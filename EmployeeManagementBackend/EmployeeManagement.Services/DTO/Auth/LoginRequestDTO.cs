@@ -12,5 +12,8 @@ public class LoginRequestDTO
     [StringLength(12, MinimumLength = 6, ErrorMessage = "Password shoud be in between 6 and 12 digit")]
     public required string Password { get; set; }
 
+    [Required]
+    public required string CaptchaToken { get; set; }
+
     public Boolean RememberMe { get; set; }
 }

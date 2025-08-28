@@ -7,6 +7,7 @@ using EmployeeManagement.Services.Auth.DTO;
 using EmployeeManagement.Services.DTO.Auth;
 using EmployeeManagement.Services.Helpers;
 using EmployeeManagement.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
 namespace EmployeeManagement.Services.Implementations;
@@ -17,17 +18,29 @@ public class AuthenticationService : IAuthenticationService
     private readonly ITokenService _tokenService;
     private readonly IMapper _mapper;
     private readonly IConfiguration _config;
-    public AuthenticationService(IConfiguration configuration, ITokenService tokenService, IMapper mapper, IEmployeeRepository employeeRepository)
+    private readonly HttpContext _httpContext;
+    private readonly IRecaptchaV2Service _captchaService ;
+    public AuthenticationService(IConfiguration configuration, IRecaptchaV2Service captchaService,IHttpContextAccessor httpContextAccessor, ITokenService tokenService, IMapper mapper, IEmployeeRepository employeeRepository)
     {
         _tokenService = tokenService;
         _mapper = mapper;
         _config = configuration;
         _employeeRepository = employeeRepository;
+        _httpContext = httpContextAccessor.HttpContext;
+        _captchaService = captchaService;
 
     }
 
     public async Task<AuthResponseDTO> LoginAsync(LoginRequestDTO loginRequest)
     {
+        string ip = _httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        bool isCaptchaValid = await _captchaService.ValidateAsync(loginRequest.CaptchaToken, ip);
+
+        // correct this one
+        if (!isCaptchaValid)
+            throw new UnauthorizedAccessException("Invalid CAPTCHA.");
+
         Employee? employee = await _employeeRepository.GetEmployeeByEmail(loginRequest.Email);
 
         if (employee == null || !PasswordHelper.VerifyPassword(loginRequest.Password, employee.HashPassword))
